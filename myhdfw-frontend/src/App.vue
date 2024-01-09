@@ -1,26 +1,24 @@
-<template>
-  <img alt="Vue logo" src="./assets/schwinnes.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import StundenplanStudent from "@/components/Stundenplan-Student.vue";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    StundenplanStudent
+
   }
 }
 </script>
 
+
+<template>
+  <StundenplanStudent></StundenplanStudent>
+</template>
+
+
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
+
+
