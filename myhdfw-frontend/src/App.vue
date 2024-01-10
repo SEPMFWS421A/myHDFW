@@ -5,7 +5,7 @@ import StundenplanStudent from "@/components/Stundenplan-Student.vue";
 export default {
   name: 'App',
   components: {
-    StundenplanStudent
+    StundenplanStudent,
 
   }
 }
@@ -13,7 +13,7 @@ export default {
 
 
 <template>
-  <StundenplanStudent></StundenplanStudent>
+  <router-view> </router-view>
 </template>
 
 
