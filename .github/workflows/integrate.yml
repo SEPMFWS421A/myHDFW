@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./myhdfw-frontend
+        working-directory: ./myHDFW-frontend-vite
     strategy:
       matrix:
         node-version: [18.19.0]
