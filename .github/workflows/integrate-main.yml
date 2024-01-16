@@ -9,7 +9,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  release:
+  sys-test:
+    name: Run TestCafe Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: myHDFW-frontend-vite
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+      - name: Run tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "chrome systemtest"
+  build:
+    name: Build Vue Frontend
     runs-on: ubuntu-latest
     defaults:
       run:
