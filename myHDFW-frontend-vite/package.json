@@ -16,7 +16,11 @@
     "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@fullcalendar/vue3": "^6.1.10",
+    "bootstrap-vue": "^2.23.1",
     "event-utils": "^2.1.0",
+    "primeflex": "^3.3.1",
+    "primeicons": "^6.0.1",
+    "primevue": "^3.46.0",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5"
   },
