@@ -2,20 +2,14 @@ name: Node.js CI
 
 on:
   push:
-    paths:
-      - ./myHDFW-frontend-vite/**
-    branches:
-      - main
-      - dev
+    branches: [ "dev" ]
   pull_request:
-    paths:
-      - ./myHDFW-frontend-vite/**
-    branches:
-      - main
-      - dev
+    branches: [ "dev" ]
+
+  workflow_dispatch:
 
 jobs:
-  build-vue:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:

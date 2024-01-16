@@ -6,3 +6,8 @@
 *.njsproj
 *.sln
 *.sw?
+
+# Accidental NPM files
+node_modules
+package-lock.json
+package.json
