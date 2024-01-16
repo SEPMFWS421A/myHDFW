@@ -32,19 +32,19 @@
         </template>
 
         <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-        <Column field="code" header="Code" sortable style="min-width:12rem"></Column>
-        <Column field="name" header="Name" sortable style="min-width:16rem"></Column>
+        <Column field="code" header="Matrikelnummer" sortable style="min-width:12rem"></Column>
+        <Column field="name" header="Name des Studenten" sortable style="min-width:16rem"></Column>
         <Column header="Image">
           <template #body="slotProps">
             <img :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`" :alt="slotProps.data.image" class="shadow-2 border-round" style="width: 64px" />
           </template>
         </Column>
-        <Column field="price" header="Price" sortable style="min-width:8rem">
+        <Column field="price" header="Eintrittsdatum" sortable style="min-width:8rem">
           <template #body="slotProps">
             {{formatCurrency(slotProps.data.price)}}
           </template>
         </Column>
-        <Column field="category" header="Category" sortable style="min-width:10rem"></Column>
+        <Column field="category" header="Studiengang" sortable style="min-width:10rem"></Column>
         <Column field="rating" header="Reviews" sortable style="min-width:12rem">
           <template #body="slotProps">
             <Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" />
