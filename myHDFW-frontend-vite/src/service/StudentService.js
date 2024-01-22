@@ -1,5 +1,5 @@
-export const ProductService = {
-    getProductsData() {
+export const StudentService = {
+    getStudentsData() {
         return [
             {
                 id: '1000',
@@ -17,7 +17,7 @@ export const ProductService = {
         ];
     },
 
-    getProducts() {
-        return Promise.resolve(this.getProductsData());
+    getStudents() {
+        return Promise.resolve(this.getStudentsData());
     }
 };
