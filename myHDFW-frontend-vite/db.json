@@ -1,0 +1,44 @@
+{
+    "Semester" : {
+        "1": {
+            "modulname": "Informatik",
+            "status": "N/E",
+            "note": "N/E",
+            "credit": "5 ECTS",
+            "versuch": "1",
+            "pruefungstermin": "N/E"
+        },
+        "2": {
+            "modulname": "Kunst",
+            "status": "N/E",
+            "note": "N/E",
+            "credit": "5 ECTS",
+            "versuch": "1",
+            "pruefungstermin": "N/E"
+        },
+        "3": {
+            "modulname": "Malen",
+            "status": "N/E",
+            "note": "N/E",
+            "credit": "5 ECTS",
+            "versuch": "1",
+            "pruefungstermin": "N/E"
+        },
+        "4": {
+            "modulname": "Tanzen",
+            "status": "N/E",
+            "note": "N/E",
+            "credit": "5 ECTS",
+            "versuch": "1",
+            "pruefungstermin": "N/E"
+        },
+        "5": {
+            "modulname": "VWL",
+            "status": "N/E",
+            "note": "N/E",
+            "credit": "5 ECTS",
+            "versuch": "1",
+            "pruefungstermin": "N/E"
+        }
+    }
+}

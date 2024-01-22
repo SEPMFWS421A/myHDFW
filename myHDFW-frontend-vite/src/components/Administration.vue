@@ -4,6 +4,8 @@
     <p>{{ message }}</p>
   </div>
   <RouterLink to="/Schedule">Zum Kalender</RouterLink>
+  <br>
+  <RouterLink to="/Overview">Zur Noten- und Prüfungsübersicht</RouterLink>
 </template>
 
 <script>
