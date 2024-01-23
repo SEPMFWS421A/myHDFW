@@ -93,6 +93,7 @@ export default defineComponent({
               type='checkbox'
               :checked='calendarOptions.weekends'
               @change='handleWeekendsToggle'
+              id='checkbox-weekend'
           />
           Wochenenden anzeigen
         </label>
