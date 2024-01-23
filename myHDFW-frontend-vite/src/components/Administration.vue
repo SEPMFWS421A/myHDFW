@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <h1>{{ greeting }}</h1>
-    <p>{{ message }}</p>
-  </div>
   <RouterLink to="/Schedule">Zum Kalender</RouterLink>
+  <RouterLink to="/Home_page">Zur Startseite</RouterLink>
 </template>
 
 <script>
