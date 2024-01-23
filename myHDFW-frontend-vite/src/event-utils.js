@@ -15,12 +15,12 @@ export const INITIAL_EVENTS = [
     },
     {
         id: createEventId(),
-        title: 'Project Review',
+        title: 'Projekt Review',
         start: '2024-01-23T10:00:00',
     },
     {
         id: createEventId(),
-        title: 'Working ',
+        title: 'Arbeiten',
         start: '2024-01-26T10:00:00',
     }
 ]

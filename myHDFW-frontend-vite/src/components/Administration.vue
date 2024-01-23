@@ -177,9 +177,9 @@ const filters = ref({
 });
 const submitted = ref(false);
 const statuses = ref([
-  {label: 'INSTOCK', value: 'instock'},
-  {label: 'LOWSTOCK', value: 'lowstock'},
-  {label: 'OUTOFSTOCK', value: 'outofstock'}
+  {label: 'Studiert', value: 'studiert'},
+  {label: 'Fehler', value: 'fehler'},
+  {label: 'Exmatrikuliert', value: 'exmatrikuliert'}
 ]);
 
 const formatCurrency = (value) => {
@@ -266,13 +266,13 @@ const deleteSelectedStudents = () => {
 
 const getStatusLabel = (status) => {
   switch (status) {
-    case 'INSTOCK':
+    case 'Studiert':
       return 'success';
 
-    case 'LOWSTOCK':
+    case 'Fehler':
       return 'warning';
 
-    case 'OUTOFSTOCK':
+    case 'Exmatrikuliert':
       return 'danger';
 
     default:

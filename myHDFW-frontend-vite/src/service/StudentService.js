@@ -4,13 +4,13 @@ export const StudentService = {
             {
                 id: '1000',
                 code: 'f230fh0g3',
-                name: 'Bamboo Watch',
+                name: 'Bamboo Student',
                 description: 'Product Description',
                 image: 'bamboo-watch.jpg',
-                price: 65,
-                category: 'Accessories',
+                price: 595,
+                category: 'Wirtschaftsinformatik',
                 quantity: 24,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'Studiert',
                 rating: 5
             },
 
