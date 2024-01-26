@@ -24,3 +24,19 @@ p {
     line-height: 1.75;
 }
 
+.p-panel-header{
+    background-color: white;
+    border-bottom: none;
+}
+
+.p-panel-title{
+    margin: auto;
+}
+
+.p-panel-content{
+    text-align: center;
+}
+
+.card{
+    background-color: #ECF0F2;
+}
