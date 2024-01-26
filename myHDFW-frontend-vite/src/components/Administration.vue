@@ -1,7 +1,6 @@
 
 
 <template>
-  <RouterLink to="/Schedule">Zum Kalender</RouterLink>
   <div>
     <div class="card">
       <Toolbar class="mb-4">
@@ -155,10 +154,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { FilterMatchMode } from 'primevue/api';
-import { useToast } from 'primevue/usetoast';
-import { StudentService } from '@/service/StudentService';
+import {onMounted, ref} from 'vue';
+import {FilterMatchMode} from 'primevue/api';
+import {useToast} from 'primevue/usetoast';
+import {StudentService} from '@/service/StudentService';
 
 onMounted(() => {
   StudentService.getStudents().then((data) => (students.value = data));
