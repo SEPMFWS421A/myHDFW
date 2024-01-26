@@ -54,4 +54,3 @@ jobs:
         name: Install dependencies
       - run: npm run test:unit
         name: Run Unit-Tests
-        continue-on-error: true
