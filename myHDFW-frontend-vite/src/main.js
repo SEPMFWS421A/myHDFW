@@ -1,7 +1,5 @@
-
-
-import { createApp } from 'vue'
-import './style.css'
+import {createApp} from 'vue'
+import './style.scss'
 import App from './App.vue'
 import router from './router'
 
@@ -9,7 +7,7 @@ import "primeflex/primeflex.css";
 import "primevue/resources/themes/lara-light-green/theme.css";
 import "primevue/resources/primevue.min.css"; /* Deprecated */
 import "primeicons/primeicons.css";
-import "./style.css";
+import "./style.scss";
 import "./flags.css";
 import PrimeVue from "primevue/config";
 import AutoComplete from 'primevue/autocomplete';
