@@ -44,4 +44,4 @@ jobs:
       - name: Run e2e-tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: "chrome ./src/systemtest/"
+          args: "chrome ./myHDFW-frontend-vite/src/systemtest/"
