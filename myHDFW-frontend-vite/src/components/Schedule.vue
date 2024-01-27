@@ -1,10 +1,10 @@
 <script>
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from '../event-utils.js'
+import {createEventId, INITIAL_EVENTS} from '../event-utils.js'
 
 export default defineComponent({
   components: {
@@ -78,7 +78,6 @@ export default defineComponent({
 <template>
   <div class='demo-app'>
     <div class='demo-app-sidebar'>
-      <RouterLink to="/">Zurück zur Startseite</RouterLink>
       <div class='demo-app-sidebar-section'>
         <h2>Einführung</h2>
         <ul>
@@ -93,6 +92,7 @@ export default defineComponent({
               type='checkbox'
               :checked='calendarOptions.weekends'
               @change='handleWeekendsToggle'
+              id='checkbox-weekend'
           />
           Wochenenden anzeigen
         </label>
@@ -121,7 +121,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style lang='css'>
+<style lang='css' scoped>
 
 h2 {
   margin: 0;
