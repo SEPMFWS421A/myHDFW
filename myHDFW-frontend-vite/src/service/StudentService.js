@@ -10,7 +10,7 @@ export const StudentService = {
                 price: 595,
                 category: 'Wirtschaftsinformatik',
                 quantity: 24,
-                inventoryStatus: 'Studiert',
+                inventoryStatus: 'Exmatrikuliert',
                 rating: 5
             },
 
