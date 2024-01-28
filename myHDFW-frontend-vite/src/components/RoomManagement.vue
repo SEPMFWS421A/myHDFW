@@ -1,30 +1,31 @@
 <template>
-    <RouterLink to="/Schedule">Zum Kalender</RouterLink>
+    <div style="height: 10%; background-color: #ECF0F2; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+    </div>
     <div style="background-color: #ECF0F2;">
-    <div style="width: 25%; margin: auto; ">
-      <Panel header="Raumverwaltung" style="margin: auto ;">
-          <RouterLink to="/Schedule/">
-            <img src="https://taz.de/picture/4989773/948/kfw-kredite-studienkredite-studenten-corona-1.jpeg" class="" alt="empty_lecture_room" width="150%" style="width: 50%; border-radius: 20px;">
-          </RouterLink>
-        </Panel>
+      <div style="width: 25%; margin: auto; ">
+        <RouterLink to="/Schedule/">
+          <Panel header="Raumverwaltung" style="margin: auto ;">
+              <img src="https://taz.de/picture/4989773/948/kfw-kredite-studienkredite-studenten-corona-1.jpeg" class="" alt="empty_lecture_room" width="150%" style="width: 50%; border-radius: 20px;">
+          </Panel>
+        </RouterLink>
 
         <Toolbar class="mb-10" style="padding-top: 10%; border: none; background-color:#ECF0F2">
           <template #start>
             <Button id="add_room" label="Raum hinzufügen" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
           </template>
-  
+
           <template #end>
-            <Button id="delete_room" label="Raum löschen" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedStudents || !selectedStudents.length" />
+            <Button id="delete_room" label="Raum löschen" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedRooms || !selectedRooms.length" />
           </template>
         </Toolbar>
-    </div>
+      </div>
 
     <div>
       <div class="card">
-        <DataTable ref="dt" :value="students" v-model:selection="selectedStudents" dataKey="id"
+        <DataTable ref="dt" :value="Rooms" v-model:selection="selectedRooms" dataKey="id"
                    :paginator="true" :rows="10" :filters="filters"
                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5,10,25]"
-                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} students">
+                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} rooms">
           <template #header>
             <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
               <span class="p-input-icon-left">
@@ -35,109 +36,79 @@
           </template>
   
           <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-          <Column field="code" header="Bezeichnung" sortable style="min-width:12rem"></Column>
-          <Column field="name" header="Kapazität" sortable style="min-width:16rem"></Column>
-          <Column field="category" header="Kapazität-Klausur" sortable style="min-width:10rem"></Column>
-          <Column field="category" header="Ausstattung" sortable style="min-width:10rem"></Column>
-          <Column field="category" header="Standort" sortable style="min-width:10rem"></Column>
+          <Column field="designation" header="Bezeichnung" sortable style="min-width:12rem"></Column>
+          <Column field="capacity" header="Kapazität" sortable style="min-width:16rem"></Column>
+          <Column field="exam_capacity" header="Kapazität-Klausur" sortable style="min-width:10rem"></Column>
+          <Column field="equipment" header="Ausstattung" sortable style="min-width:10rem"></Column>
+          <Column field="location" header="Standort" sortable style="min-width:10rem"></Column>
           <Column :exportable="false" style="min-width:8rem">
             <template #body="slotProps">
-              <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editStudent(slotProps.data)" />
-              <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteStudent(slotProps.data)" />
+              <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editRoom(slotProps.data)" />
+              <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteRoom(slotProps.data)" />
             </template>
           </Column>
         </DataTable>
       </div>
-  
-      <Dialog v-model:visible="studentDialog" :style="{width: '450px'}" header="Raum Details" :modal="true" class="p-fluid">
-        <img v-if="student.image" :src="`https://primefaces.org/cdn/primevue/images/product/${student.image}`" :alt="student.image" class="block m-auto pb-3" />
+      
+      <!--Dialog zum anlegen-->
+      <Dialog v-model:visible="RoomDialog" :style="{width: '450px'}" header="Raum Details" :modal="true" class="p-fluid">
         <div class="field">
-          <label for="name">Name</label>
-          <InputText id="name" v-model.trim="student.name" required="true" autofocus :class="{'p-invalid': submitted && !student.name}" />
-          <small class="p-error" v-if="submitted && !student.name">Name is required.</small>
+          <label for="designation">Bezeichnung</label>
+          <InputText id="designation" v-model.trim="Room.name" required="true" autofocus :class="{'p-invalid': submitted && !Room.name}" />
+          <small class="p-error" v-if="submitted && !Room.name">Name is required.</small>
         </div>
+
         <div class="field">
-          <label for="description">Description</label>
-          <Textarea id="description" v-model="student.description" required="true" rows="3" cols="20" />
-        </div>
-  
-        <div class="field">
-          <label for="inventoryStatus" class="mb-3">Inventory Status</label>
-          <Dropdown id="inventoryStatus" v-model="student.inventoryStatus" :options="statuses" optionLabel="label" placeholder="Select a Status">
-            <template #value="slotProps">
-              <div v-if="slotProps.value && slotProps.value.value">
-                <Tag :value="slotProps.value.value" :severity="getStatusLabel(slotProps.value.label)" />
-              </div>
-              <div v-else-if="slotProps.value && !slotProps.value.value">
-                <Tag :value="slotProps.value" :severity="getStatusLabel(slotProps.value)" />
-              </div>
-              <span v-else>
-                              {{slotProps.placeholder}}
-                          </span>
-            </template>
-          </Dropdown>
+          <label for="capacity">Kapazität</label>
+          <Textarea id="capacity" v-model="Room.description" required="true" rows="3" cols="20" />
         </div>
   
         <div class="field">
-          <label class="mb-3">Category</label>
-          <div class="formgrid grid">
-            <div class="field-radiobutton col-6">
-              <RadioButton id="category1" name="category" value="Accessories" v-model="student.category" />
-              <label for="category1">Accessories</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <RadioButton id="category2" name="category" value="Clothing" v-model="student.category" />
-              <label for="category2">Clothing</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <RadioButton id="category3" name="category" value="Electronics" v-model="student.category" />
-              <label for="category3">Electronics</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <RadioButton id="category4" name="category" value="Fitness" v-model="student.category" />
-              <label for="category4">Fitness</label>
-            </div>
-          </div>
+          <label for="exam_capacity" class="mb-3">Klausurkapazität</label>
+          <Textarea id="exam_capacity" v-model="Room.description" required="true" rows="3" cols="20" />
         </div>
   
-        <div class="formgrid grid">
-          <div class="field col">
-            <label for="price">Price</label>
-            <InputNumber id="price" v-model="student.price" mode="currency" currency="USD" locale="en-US" />
-          </div>
-          <div class="field col">
-            <label for="quantity">Quantity</label>
-            <InputNumber id="quantity" v-model="student.quantity" integeronly />
-          </div>
+        <div class="field">
+          <label for="equipment" class="mb-3">Ausstattung</label>
+          <Textarea id="equipment" v-model="Room.description" required="true" rows="3" cols="20" />
+        </div>
+  
+        <div class="field">
+          <label for="location" class="mb-3">Standort</label>
+          <Textarea id="location" v-model="Room.description" required="true" rows="3" cols="20" />
         </div>
         <template #footer>
-          <Button label="Cancel" icon="pi pi-times" text @click="hideDialog"/>
-          <Button label="Save" icon="pi pi-check" text @click="saveStudent" />
+          <Button id="cancel_add_room" label="Cancel" icon="pi pi-times" text @click="hideDialog"/>
+          <Button id="add_room" label="Save" icon="pi pi-check" text @click="saveRoom" />
         </template>
       </Dialog>
   
-      <Dialog v-model:visible="deleteStudentDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+      <!--Dialog zum löschen-->
+      <Dialog v-model:visible="deleteRoomDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
         <div class="confirmation-content">
           <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-          <span v-if="student">Are you sure you want to delete <b>{{student.name}}</b>?</span>
+          <span v-if="Room">Bist du sicher den Raum löschen zu wollen?<b>{{Room.designation}}</b>?</span>
         </div>
         <template #footer>
-          <Button label="No" icon="pi pi-times" text @click="deleteStudentDialog = false"/>
-          <Button label="Yes" icon="pi pi-check" text @click="deleteStudent" />
+          <Button id="cancel_delete_room" label="No" icon="pi pi-times" text @click="deleteRoomDialog = false"/>
+          <Button id="delete_room" label="Yes" icon="pi pi-check" text @click="deleteRoom" />
         </template>
       </Dialog>
-  
-      <Dialog v-model:visible="deleteStudentsDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+      
+      <!--Dialog zum mehrfach löschen-->
+      <Dialog v-model:visible="deleteRoomsDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
         <div class="confirmation-content">
           <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-          <span v-if="student">Are you sure you want to delete the selected students?</span>
+          <span v-if="Room">Bist du sicher die Räume zu löschen?</span>
         </div>
         <template #footer>
-          <Button label="No" icon="pi pi-times" text @click="deleteStudentsDialog = false"/>
-          <Button label="Yes" icon="pi pi-check" text @click="deleteSelectedStudents" />
+          <Button id="cancel_delete_rooms" label="No" icon="pi pi-times" text @click="deleteRoomsDialog = false"/>
+          <Button id="delete_rooms" label="Yes" icon="pi pi-check" text @click="deleteSelectedRooms" />
         </template>
       </Dialog>
     </div>
+   </div>
+   <div style="background-color: #ECF0F2;    border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; height: 5%;">
    </div>
   </template>
   
@@ -145,84 +116,74 @@
   import { ref, onMounted } from 'vue';
   import { FilterMatchMode } from 'primevue/api';
   import { useToast } from 'primevue/usetoast';
-  import { StudentService } from '@/service/StudentService';
+  import { RoomService } from '@/service/RoomService';
   
   onMounted(() => {
-    StudentService.getStudents().then((data) => (students.value = data));
+    RoomService.getRooms().then((data) => (Rooms.value = data));
   });
   
   const toast = useToast();
   const dt = ref();
-  const students = ref();
-  const studentDialog = ref(false);
-  const deleteStudentDialog = ref(false);
-  const deleteStudentsDialog = ref(false);
-  const student = ref({});
-  const selectedStudents = ref();
+  const Rooms = ref();
+  const RoomDialog = ref(false);
+  const deleteRoomDialog = ref(false);
+  const deleteRoomsDialog = ref(false);
+  const Room = ref({});
+  const selectedRooms = ref();
   const filters = ref({
     'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
   });
   const submitted = ref(false);
-  const statuses = ref([
-    {label: 'Studiert', value: 'studiert'},
-    {label: 'Fehler', value: 'fehler'},
-    {label: 'Exmatrikuliert', value: 'exmatrikuliert'}
-  ]);
-  
-  const formatCurrency = (value) => {
-    if(value)
-      return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
-    return;
-  };
+
   const openNew = () => {
-    student.value = {};
+    Room.value = {};
     submitted.value = false;
-    studentDialog.value = true;
+    RoomDialog.value = true;
   };
   const hideDialog = () => {
-    studentDialog.value = false;
+    RoomDialog.value = false;
     submitted.value = false;
   };
-  const saveStudent = () => {
+  const saveRoom = () => {
     submitted.value = true;
   
-    if (student.value.name.trim()) {
-      if (student.value.id) {
-        student.value.inventoryStatus = student.value.inventoryStatus.value ? student.value.inventoryStatus.value : student.value.inventoryStatus;
-        students.value[findIndexById(student.value.id)] = student.value;
-        toast.add({severity:'success', summary: 'Successful', detail: 'Student Updated', life: 3000});
+    if (Room.value.name.trim()) {
+      if (Room.value.id) {
+        Room.value.inventoryStatus = Room.value.inventoryStatus.value ? Room.value.inventoryStatus.value : Room.value.inventoryStatus;
+        Rooms.value[findIndexById(Room.value.id)] = Room.value;
+        toast.add({severity:'success', summary: 'Successful', detail: 'Room Updated', life: 3000});
       }
       else {
-        student.value.id = createId();
-        student.value.code = createId();
-        student.value.image = 'student-placeholder.svg';
-        student.value.inventoryStatus = student.value.inventoryStatus ? student.value.inventoryStatus.value : 'INSTOCK';
-        students.value.push(student.value);
-        toast.add({severity:'success', summary: 'Successful', detail: 'Student Created', life: 3000});
+        Room.value.id = createId();
+        Room.value.code = createId();
+        Room.value.image = 'Room-placeholder.svg';
+        Room.value.inventoryStatus = Room.value.inventoryStatus ? Room.value.inventoryStatus.value : 'INSTOCK';
+        Rooms.value.push(Room.value);
+        toast.add({severity:'success', summary: 'Successful', detail: 'Room Created', life: 3000});
       }
   
-      studentDialog.value = false;
-      student.value = {};
+      RoomDialog.value = false;
+      Room.value = {};
     }
   };
-  const editStudent = (prod) => {
-    student.value = {...prod};
-    studentDialog.value = true;
+  const editRoom = (prod) => {
+    Room.value = {...prod};
+    RoomDialog.value = true;
   };
-  const confirmDeleteStudent = (prod) => {
-    student.value = prod;
-    deleteStudentDialog.value = true;
+  const confirmDeleteRoom = (prod) => {
+    Room.value = prod;
+    deleteRoomDialog.value = true;
   };
-  const deleteStudent = () => {
-    students.value = students.value.filter(val => val.id !== student.value.id);
-    deleteStudentDialog.value = false;
-    student.value = {};
-    toast.add({severity:'success', summary: 'Successful', detail: 'Student Deleted', life: 3000});
+  const deleteRoom = () => {
+    Rooms.value = Rooms.value.filter(val => val.id !== Room.value.id);
+    deleteRoomDialog.value = false;
+    Room.value = {};
+    toast.add({severity:'success', summary: 'Successful', detail: 'Room Deleted', life: 3000});
   };
   const findIndexById = (id) => {
     let index = -1;
-    for (let i = 0; i < students.value.length; i++) {
-      if (students.value[i].id === id) {
+    for (let i = 0; i < Rooms.value.length; i++) {
+      if (Rooms.value[i].id === id) {
         index = i;
         break;
       }
@@ -242,29 +203,13 @@
     dt.value.exportCSV();
   };
   const confirmDeleteSelected = () => {
-    deleteStudentsDialog.value = true;
+    deleteRoomsDialog.value = true;
   };
-  const deleteSelectedStudents = () => {
-    students.value = students.value.filter(val => !selectedStudents.value.includes(val));
-    deleteStudentsDialog.value = false;
-    selectedStudents.value = null;
-    toast.add({severity:'success', summary: 'Successful', detail: 'Students Deleted', life: 3000});
-  };
-  
-  const getStatusLabel = (status) => {
-    switch (status) {
-      case 'Studiert':
-        return 'success';
-  
-      case 'Fehler':
-        return 'warning';
-  
-      case 'Exmatrikuliert':
-        return 'danger';
-  
-      default:
-        return null;
-    }
+  const deleteSelectedRooms = () => {
+    Rooms.value = rooms.value.filter(val => !selectedRooms.value.includes(val));
+    deleteRoomsDialog.value = false;
+    selectedRooms.value = null;
+    toast.add({severity:'success', summary: 'Successful', detail: 'Rooms Deleted', life: 3000});
   };
   
   </script>
