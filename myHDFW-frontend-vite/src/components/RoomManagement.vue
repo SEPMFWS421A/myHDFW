@@ -2,23 +2,26 @@
     <div style="height: 10%; background-color: #ECF0F2; border-top-right-radius: 20px; border-top-left-radius: 20px;">
     </div>
     <div style="background-color: #ECF0F2;">
-      <div style="width: 25%; margin: auto; ">
-        <RouterLink to="/Schedule/">
-          <Panel header="Raumverwaltung" style="margin: auto ;">
-              <img src="https://taz.de/picture/4989773/948/kfw-kredite-studienkredite-studenten-corona-1.jpeg" class="" alt="empty_lecture_room" width="150%" style="width: 50%; border-radius: 20px;">
-          </Panel>
-        </RouterLink>
 
-        <Toolbar class="mb-10" style="padding-top: 10%; border: none; background-color:#ECF0F2">
+<Card style="width: 35rem; overflow: hidden; margin: auto;">
+    <template #header>
+        <img style="height: 20%; width: 100%;" alt="user header" src="https://taz.de/picture/4989773/948/kfw-kredite-studienkredite-studenten-corona-1.jpeg" />
+    </template>
+    <template #title>Raumverwaltung <Button style="left: 50%; background-color: white; border-color: lightgray; color: black;" label="" icon="pi pi-question-circle" id="add_room" /></template>
+    <template #content>
+        <Toolbar>
           <template #start>
-            <Button id="add_room" label="Raum hinzufügen" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
+            <Button style="background-color: #645FCE; border-color: white;" label="Raum hinzufügen" icon="pi pi-plus" severity="success"  @click.native="openNew" id="add_room" />
           </template>
 
           <template #end>
             <Button id="delete_room" label="Raum löschen" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedRooms || !selectedRooms.length" />
           </template>
         </Toolbar>
-      </div>
+    </template>
+</Card>    
+
+
 
     <div>
       <div class="card">
@@ -43,7 +46,7 @@
           <Column field="location" header="Standort" sortable style="min-width:10rem"></Column>
           <Column :exportable="false" style="min-width:8rem">
             <template #body="slotProps">
-              <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editRoom(slotProps.data)" />
+              <Button style="border-color: #AE5FCF; color: #AE5FCF;" icon="pi pi-pencil" outlined rounded class="mr-2" @click="editRoom(slotProps.data)" />
               <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteRoom(slotProps.data)" />
             </template>
           </Column>
@@ -54,29 +57,34 @@
       <Dialog v-model:visible="RoomDialog" :style="{width: '450px'}" header="Raum Details" :modal="true" class="p-fluid">
         <div class="field">
           <label for="designation">Bezeichnung</label>
-          <InputText id="designation" v-model.trim="Room.name" required="true" autofocus :class="{'p-invalid': submitted && !Room.name}" />
-          <small class="p-error" v-if="submitted && !Room.name">Name is required.</small>
+          <InputText id="designation" v-model.trim="Room.designation" required="true" autofocus :class="{'p-invalid': submitted && !Room.designation}" />
+          <small class="p-error" v-if="submitted && !Room.designation">Bezeichnung ist erforderlich!</small>
         </div>
 
         <div class="field">
           <label for="capacity">Kapazität</label>
-          <Textarea id="capacity" v-model="Room.description" required="true" rows="3" cols="20" />
+          <InputText id="capacity" v-model.trim="Room.capacity" required="true" autofocus :class="{'p-invalid': submitted && !Room.capacity}" />
+          <small class="p-error" v-if="submitted && !Room.capacity">Kapazität ist erforderlich!</small>
         </div>
   
         <div class="field">
-          <label for="exam_capacity" class="mb-3">Klausurkapazität</label>
-          <Textarea id="exam_capacity" v-model="Room.description" required="true" rows="3" cols="20" />
+          <label for="exam_capacity">Klausurkapazität</label>
+          <InputText id="exam_capacity" v-model.trim="Room.exam_capacity" required="true" autofocus :class="{'p-invalid': submitted && !Room.exam_capacity}" />
+          <small class="p-error" v-if="submitted && !Room.exam_capacity">Klausurkapazität ist erforderlich!</small>
         </div>
   
         <div class="field">
-          <label for="equipment" class="mb-3">Ausstattung</label>
-          <Textarea id="equipment" v-model="Room.description" required="true" rows="3" cols="20" />
+          <label for="equipment">Ausstattung</label>
+          <InputText id="equipment" v-model.trim="Room.equipment" required="true" autofocus :class="{'p-invalid': submitted && !Room.equipment}" />
+          <small class="p-error" v-if="submitted && !Room.equipment">Ausstattung ist erforderlich!</small>
         </div>
   
         <div class="field">
-          <label for="location" class="mb-3">Standort</label>
-          <Textarea id="location" v-model="Room.description" required="true" rows="3" cols="20" />
+          <label for="location">Standort</label>
+          <InputText id="location" v-model.trim="Room.location" required="true" autofocus :class="{'p-invalid': submitted && !Room.location}" />
+          <small class="p-error" v-if="submitted && !Room.location">Standort ist erforderlich!</small>
         </div>
+
         <template #footer>
           <Button id="cancel_add_room" label="Cancel" icon="pi pi-times" text @click="hideDialog"/>
           <Button id="add_room" label="Save" icon="pi pi-check" text @click="saveRoom" />
@@ -147,7 +155,7 @@
   const saveRoom = () => {
     submitted.value = true;
   
-    if (Room.value.name.trim()) {
+    if (Room.value.designation.trim()) {
       if (Room.value.id) {
         Room.value.inventoryStatus = Room.value.inventoryStatus.value ? Room.value.inventoryStatus.value : Room.value.inventoryStatus;
         Rooms.value[findIndexById(Room.value.id)] = Room.value;
