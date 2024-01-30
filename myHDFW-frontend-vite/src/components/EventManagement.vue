@@ -47,7 +47,7 @@
           <Column :exportable="false" style="min-width:8rem">
             <template #body="slotProps">
               <Button style="border-color: #AE5FCF; color: #AE5FCF;" icon="pi pi-pencil" outlined rounded class="mr-2" @click="editEvent(slotProps.data)" />
-              <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteEvent(slotProps.data)" />
+              <Button style="border-color: #CFC25F; color: #CFC25F;" icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteEvent(slotProps.data)" />
             </template>
           </Column>
         </DataTable>
@@ -68,14 +68,14 @@
         </div>
 
         <div class="field">
-          <label for="start">Start</label>
-          <InputText id="start" v-model.trim="Event.starting_point" required="true" autofocus :class="{'p-invalid': submitted && !Event.starting_point}" />
+          <label for="starting_point">Start</label>
+          <InputText id="starting_point" v-model.trim="Event.starting_point" required="true" autofocus :class="{'p-invalid': submitted && !Event.starting_point}" />
           <small class="p-error" v-if="submitted && !Event.starting_point">Ein Startpunkt ist erforderlich!</small>
         </div>
 
         <div class="field">
-          <label for="end">Ende</label>
-          <InputText id="end" v-model.trim="Event.end_point" required="true" autofocus :class="{'p-invalid': submitted && !Event.end_point}" />
+          <label for="end_point">Ende</label>
+          <InputText id="end_point" v-model.trim="Event.end_point" required="true" autofocus :class="{'p-invalid': submitted && !Event.end_point}" />
           <small class="p-error" v-if="submitted && !Event.end_point">Ein Endpunkt ist erforderlich!</small>
         </div>
 
