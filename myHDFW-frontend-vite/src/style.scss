@@ -24,6 +24,20 @@ p {
     line-height: 1.75;
 }
 
+
+.fc .fc-col-header,
+.fc .fc-timegrid-axis-frame,
+.fc .fc-timegrid-slot-label,
+.fc .fc-scrollgrid-shrink{
+    background-color: #645FCE;
+    color: white;
+}
+
+.fc .fc-timegrid-axis{
+    background-color: #F5F5F5;
+}
+
+
 @mixin use-md-icon($icon) {
     font-family: 'Material Icons';
     font-weight: normal;

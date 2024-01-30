@@ -1,21 +1,18 @@
 <template>
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 
-  <header>
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='style'>
-  <RouterLink to="/Schedule">Zum Kalender</RouterLink>
-  <RouterLink to="/Administration">Zur Administration </RouterLink>
-  </header>
   <div class="main">
-  <h2>Zum Uni Portal</h2>
-    <img src="../assets/happystudents-min.jpg" alt="Happy Students Img" width="50%" height="30%">
-    <h2 style="background-color: mediumpurple; padding: 10px; border-radius: 10px">Die Cafeteria ist geöffnet</h2>
+  <h2 style="color: #6F6AF8; padding: 1px;margin-top: 60px;font-size:120%; font-family: monospace;">Zum Uni-Portal</h2>
+    <img src="../assets/students.jpg" alt="Happy Students Img">
+    <h2 style="background-color: #FCFDFD; padding: 10px; margin-bottom:60px;border-radius: 10px">Die Cafeteria ist geöffnet</h2>
   </div>
+  <div class="light" style="background-color: #E8E9FF;position: absolute; top:12.4%; right: 115px; height:70px; width:100px; border-radius: 45px"></div>
   <div class="hint">
     <img src="../assets/light.jpg" alt="hint" width="20%" height="20%">
-    <h2>Erinnerung</h2>
-    <h2>Ihre nächste Klausur ist <br> am 24.01.2024 </h2>
+    <h2 style="color: #838383">Erinnerung</h2>
+    <h2 style="padding-bottom:30px">Ihre nächste Klausur ist <br> am 24.01.2024 </h2>
   </div>
-  <div class="sidebar">
+  <div class="sideview">
     <h4>Uni Konto:</h4>
     <h2>$14.032.22</h2>
     <br>
@@ -37,70 +34,72 @@ export default {
 };
 </script>
 
-<style>
+<style lang="css">
 h2{
-  font-family: "Inter", "Courier New", monospace;
+  font-family: 'Inter';
 }
 
 .main{
-  background-color: lightgray;
-  width: 350px;
+  background-color: #ECF0F2;
+  width: 400px;
   margin:0 auto;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
+  filter: drop-shadow(0px 5px 0px lightgray);
 }
 .main h2{
   text-align: center;
   margin: 25px;
-  font-weight: bold;
-
 }
 .main img{
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 5px auto 30px auto;
   width: 60%;
   border-radius: 20px;
-  filter: drop-shadow(1px 1px 1px grey);
+  filter: drop-shadow(1px 4px 1px lightgray);
 }
 
-.sidebar{
+.sideview{
   position: absolute;
   top:40%;
   right: 40px;
   border-radius: 10px;
 }
-.sidebar h2{
-  padding-right: 70px;
-  padding-left:10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  background-color: lightgray;
+.sideview h2{
+  padding: 15px 60px 10px 20px;
+  margin: 10px;
+  background-color: #9598D6;
   font-size: 180%;
   border-radius: 10px;
+  color: white;
 }
-.sidebar h4{
-  padding-top:50px;
+.sideview h4{
   margin:0;
+  padding-left:10px;
 }
 
 .hint{
-  background-color: lightblue;
+  background-color: #E8E9FF;
   position: absolute;
-  top:10%;
+  top:15%;
   right: 50px;
   border-radius: 10px;
+  filter: drop-shadow(1px 4px 1px lightgray);
+  padding: 1px 20px 1px 20px;
 }
 .hint h2{
   text-align: center;
-  padding-top: 20px;
+  padding: 1px 10px 10px 10px;
+  font-size: 100%;
 }
 .hint img {
+  top:10%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  width: 50px;
 }
 </style>

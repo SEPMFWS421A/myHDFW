@@ -4,6 +4,7 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import allLocales from "@fullcalendar/core/locales-all"
 import {createEventId, INITIAL_EVENTS} from '../event-utils.js'
 
 export default defineComponent({
@@ -18,10 +19,12 @@ export default defineComponent({
           timeGridPlugin,
           interactionPlugin // needed for dateClick
         ],
+        locale: 'de',
+        locales: allLocales,
         headerToolbar: {
-          left: 'prev,next today',
+          right: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          left: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         initialView: 'dayGridMonth',
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
@@ -72,46 +75,12 @@ export default defineComponent({
     },
   }
 })
-
 </script>
 
 <template>
   <div class='demo-app'>
-    <div class='demo-app-sidebar'>
-      <div class='demo-app-sidebar-section'>
-        <h2>Einführung</h2>
-        <ul>
-          <li>Wählen Sie ein Datum aus, um ein Event zu erstellen</li>
-          <li>Verschiebe Events nach belieben</li>
-          <li>Klicke ein Event um dieses zu löschen</li>
-        </ul>
-      </div>
-      <div class='demo-app-sidebar-section'>
-        <label>
-          <input
-              type='checkbox'
-              :checked='calendarOptions.weekends'
-              @change='handleWeekendsToggle'
-              id='checkbox-weekend'
-          />
-          Wochenenden anzeigen
-        </label>
-      </div>
-      <div class='demo-app-sidebar-section'>
-        <h2>Alle Events ({{ currentEvents.length }})</h2>
-        <ul>
-          <li v-for='event in currentEvents' :key='event.id'>
-            <b>{{ event.startStr }}</b>
-            <i>{{ event.title }}</i>
-          </li>
-        </ul>
-      </div>
-    </div>
     <div class='demo-app-main'>
-      <FullCalendar
-          class='demo-app-calendar'
-          :options='calendarOptions'
-      >
+      <FullCalendar class='demo-app-calendar' :options='calendarOptions'  >
         <template v-slot:eventContent='arg'>
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
@@ -122,7 +91,6 @@ export default defineComponent({
 </template>
 
 <style lang='css' scoped>
-
 h2 {
   margin: 0;
   font-size: 16px;
@@ -150,25 +118,12 @@ b { /* used for event dates/times */
 
 }
 
-.demo-app-sidebar {
-  width: 300px;
-  line-height: 1.5;
-  background: #eaf9ff;
-  border-right: 1px solid #d3e2e8;
-}
-
-.demo-app-sidebar-section {
-  padding: 2em;
-}
-
-
-
 .demo-app-main {
   flex-grow: 1;
   padding: 3em;
 }
 
-fc {
+fc{
   max-width: 1200px;
   margin: 0 auto;
 }
