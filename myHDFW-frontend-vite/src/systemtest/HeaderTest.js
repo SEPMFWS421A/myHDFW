@@ -10,13 +10,11 @@ test('Header is present on the page', async t => {
 test('Header contains all elements', async t => {
     const header_left = Selector('.header-name');
     const header_right = Selector('.header-right-menu');
-    const search = header_right.find('.searchbar');
     const notifications = header_right.find('.notifications');
     const profile = header_right.find('.profile');
 
     await t.expect(header_left.exists).ok()
             .expect(header_right.exists).ok()
-            .expect(search.exists).ok()
             .expect(notifications.exists).ok()
             .expect(profile.exists).ok();
 });

@@ -33,12 +33,6 @@ const toggleNotifications = (event) => {
   <div class="header-container">
     <div class="header-name">{{ user.name }}</div>
     <div class="header-right-menu">
-      <div class="searchbar">
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"/>
-          <InputText v-model="value1" placeholder="Suchen"/>
-        </span>
-      </div>
       <div class="notifications">
         <i class="pi pi-bell" style="font-size: 2rem" @click="toggleNotifications" aria-controls="overlay_menu"></i>
         <Menu ref="notificationsMenu" id="overlay_menu" :model="notificationsMenuItems" :popup="true">
