@@ -48,6 +48,80 @@ p {
 }
 
 
+.p-panel{
+    border-radius: 200px;
+}
+
+.p-panel-header{
+    background-color: white;
+    border-bottom: none;
+}
+
+.p-panel-title{
+    margin: auto;
+}
+
+.p-panel-content{
+    text-align: center;
+}
+
+.card{
+    background-color: #ECF0F2;
+    margin: 0px;
+}
+
+.p-card-content{
+    padding: none;
+    margin: none;
+}
+
+.top_rounding{
+    height: 10%;
+    background-color: #ECF0F2;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.background_admin{
+background-color: #ECF0F2;
+}
+.nav_card_image{
+height: 20%; width: 100%;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.nav_card_title{
+text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+color: #645FCE;
+}
+.add_room{
+background-color: #645FCE;
+border-color: white;
+}
+.delete_room{
+background-color: #CFC25F;
+border-color: white;
+}
+.add_event{
+    background-color: #645FCE;
+    border-color: white;
+}
+.delete_event{
+    background-color: #CFC25F;
+    border-color: white;
+}
+.help_button{
+left: 50%;
+background-color: white;
+border-color: lightgray;
+color: black;
+}
+.bottom_admin{
+background-color: #ECF0F2;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+height: 5%;
+}
+
+
 @mixin use-md-icon($icon) {
     font-family: 'Material Icons';
     font-weight: normal;

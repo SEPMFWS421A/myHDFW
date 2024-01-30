@@ -3,6 +3,7 @@ import Schedule from "@/components/Schedule.vue";
 import Administration from "@/components/Administration.vue";
 import home_page from "@/components/Home_page.vue";
 
+import EventManagement from "@/components/EventManagement.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
