@@ -2,15 +2,15 @@
   <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 
   <div class="main">
-  <h2 style="color: #6F6AF8; padding: 1px;margin-top: 60px;font-size:120%; font-family: monospace;">Zum Uni-Portal</h2>
+  <h2 style="color: #6F6AF8; padding: 1px;margin-top: 30px;font-size:120%; font-family: monospace;">Zum Uni-Portal</h2>
     <img src="../assets/students.jpg" alt="Happy Students Img">
-    <h2 style="background-color: #FCFDFD; padding: 10px; margin-bottom:60px;border-radius: 10px">Die Cafeteria ist geöffnet</h2>
+    <h2 style="background-color: #FCFDFD; padding: 10px; margin-bottom:30px;border-radius: 10px">Die Cafeteria ist geöffnet</h2>
   </div>
-  <div class="light" style="background-color: #E8E9FF;position: absolute; top:12.4%; right: 115px; height:70px; width:100px; border-radius: 45px"></div>
+  <div class="light" style="background-color: #E8E9FF;position: absolute; top:12.4%; right: 85px; height:70px; width:100px; border-radius: 45px"></div>
   <div class="hint">
-    <img src="../assets/light.jpg" alt="hint" width="20%" height="20%">
+    <img src="../assets/light.jpg" alt="hint">
     <h2 style="color: #838383">Erinnerung</h2>
-    <h2 style="padding-bottom:30px">Ihre nächste Klausur ist <br> am 24.01.2024 </h2>
+    <h2 style="padding-bottom:1px">Ihre nächste Klausur ist <br> am 24.01.2024 </h2>
   </div>
   <div class="sideview">
     <h4>Uni Konto:</h4>
@@ -64,15 +64,15 @@ h2{
 
 .sideview{
   position: absolute;
-  top:40%;
+  top:50%;
   right: 40px;
   border-radius: 10px;
 }
 .sideview h2{
-  padding: 15px 60px 10px 20px;
-  margin: 10px;
+  padding: 15px 60px 10px 10px;
+  margin: 1px;
   background-color: #9598D6;
-  font-size: 180%;
+  font-size: 140%;
   border-radius: 10px;
   color: white;
 }
@@ -88,11 +88,11 @@ h2{
   right: 50px;
   border-radius: 10px;
   filter: drop-shadow(1px 4px 1px lightgray);
-  padding: 1px 20px 1px 20px;
+  padding: 1px 1px 1px 1px;
 }
 .hint h2{
   text-align: center;
-  padding: 1px 10px 10px 10px;
+  padding: 1px 1px 1px 1px;
   font-size: 100%;
 }
 .hint img {
@@ -100,6 +100,6 @@ h2{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50px;
+  width: 40px;
 }
 </style>

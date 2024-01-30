@@ -5,6 +5,7 @@ import Header from './components/Header.vue'
 </script>
 
 <template>
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
   <div class="app-container">
     <div class="header">
       <Header/>
