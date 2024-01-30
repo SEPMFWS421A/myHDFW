@@ -30,8 +30,8 @@ test('Profile menu is visible after click', async t => {
     const profile = Selector('.header-right-menu').find('.profile');
     const profileMenu = Selector('.profile-menu');
 
-    const profileEntry = profileMenu.find('.p-menuitem').withText('Profil');
-    const logoutEntry = profileMenu.find('.p-menuitem').withText('Abmelden');
+    const profileEntry = profileMenu.find('.p-menuitem-text').withText('Profil');
+    const logoutEntry = profileMenu.find('.p-menuitem-text').withText('Abmelden');
 
     await t.expect(profileMenu.exists).notOk()
             .click(profile)
