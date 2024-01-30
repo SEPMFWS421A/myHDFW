@@ -14,7 +14,10 @@ const sidebar_items = ref([
 <template>
   <div class="sidebar">
     <div class="sidebar-header">
-      <img class="logo" src="../assets/hdfw.png" alt="Logo"/>
+      <RouterLink to="/">
+        <img class="logo" src="../assets/hdfw.png" alt="Logo"/>
+      </RouterLink>
+
     </div>
     <div class="sidebar-menu">
       <Menu :model="sidebar_items">

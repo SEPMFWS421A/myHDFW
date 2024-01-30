@@ -1,27 +1,28 @@
 <template>
-    <div style="height: 10%; background-color: #ECF0F2; border-top-right-radius: 20px; border-top-left-radius: 20px;">
+    <div class="top_rounding">
     </div>
-    <div style="background-color: #ECF0F2;">
+    <div class="background_admin">
 
-<Card style="width: 35rem; overflow: hidden; margin: auto;">
-    <template #header>
-        <img style="height: 20%; width: 100%;" alt="user header" src="https://taz.de/picture/4989773/948/kfw-kredite-studienkredite-studenten-corona-1.jpeg" />
-    </template>
-    <template #title>Raumverwaltung <Button style="left: 50%; background-color: white; border-color: lightgray; color: black;" label="" icon="pi pi-question-circle" id="add_room" /></template>
-    <template #content>
-        <Toolbar>
-          <template #start>
-            <Button style="background-color: #645FCE; border-color: white;" label="Raum hinzufügen" icon="pi pi-plus" severity="success"  @click.native="openNew" id="add_room" />
-          </template>
+    <Card style="width: 35rem; overflow: hidden; margin: auto;">
+      <template #header>
+        <RouterLink to="/Schedule/">
+          <img id="nav_card_image" class="nav_card_image" alt="user header" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/77f1f60f-2b47-4c08-9c95-df986efe8c7f/dd6yq9v-c9929aee-c4c8-4f67-a54f-44a96a49b8a3.png/v1/fill/w_1024,h_576,q_80,strp/visual_novel_background__classroom_by_kjkjmulo_dd6yq9v-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzc3ZjFmNjBmLTJiNDctNGMwOC05Yzk1LWRmOTg2ZWZlOGM3ZlwvZGQ2eXE5di1jOTkyOWFlZS1jNGM4LTRmNjctYTU0Zi00NGE5NmE0OWI4YTMucG5nIiwiaGVpZ2h0IjoiPD01NzYiLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS53YXRlcm1hcmsiXSwid21rIjp7InBhdGgiOiJcL3dtXC83N2YxZjYwZi0yYjQ3LTRjMDgtOWM5NS1kZjk4NmVmZThjN2ZcL2tqa2ptdWxvLTQucG5nIiwib3BhY2l0eSI6OTUsInByb3BvcnRpb25zIjowLjQ1LCJncmF2aXR5IjoiY2VudGVyIn19.tlNsovwcY-weMtUeKVrIOcyOaPdhKWG2SONVOx_dmPE" />
+        </RouterLink>
+      </template>
+      <template #title> <span class="nav_card_title">Raumverwaltung</span><Button id="add_room" class="help_button" label="" icon="pi pi-question-circle"/>
+      </template>
+      <template #content>
+          <Toolbar>
+            <template #start>
+              <Button id="add_room" class="add_room" data-pc-severity="none" label="Raum hinzufügen" icon="pi pi-plus" severity="success"  @click.native="openNew" />
+            </template>
 
-          <template #end>
-            <Button id="delete_room" label="Raum löschen" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected" :disabled="!selectedRooms || !selectedRooms.length" />
-          </template>
-        </Toolbar>
-    </template>
-</Card>    
-
-
+            <template #end>
+              <Button id="delete_room" class="delete_room" label="Raum löschen" icon="pi pi-trash" @click="confirmDeleteSelected" :disabled="!selectedRooms || !selectedRooms.length" />
+            </template>
+          </Toolbar>
+      </template>
+    </Card>    
 
     <div>
       <div class="card">
@@ -37,7 +38,6 @@
                           </span>
             </div>
           </template>
-  
           <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
           <Column field="designation" header="Bezeichnung" sortable style="min-width:12rem"></Column>
           <Column field="capacity" header="Kapazität" sortable style="min-width:16rem"></Column>
@@ -116,7 +116,7 @@
       </Dialog>
     </div>
    </div>
-   <div style="background-color: #ECF0F2;    border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; height: 5%;">
+   <div class="bottom_admin">
    </div>
   </template>
   
