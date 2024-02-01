@@ -88,6 +88,30 @@ border-bottom-left-radius: 20px;
 border-bottom-right-radius: 20px; 
 height: 5%;
 }
+.edit_column{
+    border-color: #AE5FCF; color: #AE5FCF;
+}
+.delete_column{
+    border-color: #CFC25F; color: #CFC25F;
+}
+
+.cancel_dialog{
+    color: #757366;
+}
+
+.save_dialog{
+    color: #645FCE;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+.p-dialog-title{
+    color: #645FCE;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+.icons_dialog{
+    color: #645FCE;
+}
 
 @mixin use-md-icon($icon) {
     font-family: 'Material Icons';
