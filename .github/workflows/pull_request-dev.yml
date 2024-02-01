@@ -62,7 +62,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - run: npm ci
+        name: Install dependencies
+      - name: Run dev server
+        run: npm run dev &
       - name: Run e2e-tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: "chrome ./myHDFW-frontend-vite/src/systemtest/"
+          args: "chrome:headless ./myHDFW-frontend-vite/src/systemtest/"
+      - name: Stop dev server
+        run: kill $(lsof -t -i:5173)
+        if: always()
