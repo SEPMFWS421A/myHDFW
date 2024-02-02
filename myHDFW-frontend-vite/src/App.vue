@@ -21,7 +21,7 @@ import Header from './components/Header.vue'
 <style scoped>
 .app-container {
   display: grid;
-  grid-template-columns: minmax(12.5rem, 15%) auto;
+  grid-template-columns: minmax(12.5rem, 15%) 1fr;
   grid-template-rows: 50px auto;
   height: 100vh;
   width: 100%;
