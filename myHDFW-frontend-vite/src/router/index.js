@@ -1,8 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Schedule from "@/components/Schedule.vue";
-import Administration from "@/components/Administration.vue";
+import administration from "@/components/Administration.vue";
 import home_page from "@/components/Home_page.vue";
-
 import EventManagement from "@/components/EventManagement.vue";
 
 const router = createRouter({
@@ -10,18 +9,23 @@ const router = createRouter({
   routes: [
       {
           path: '/',
-          name: 'test',
+          name: 'home',
           component: home_page
       },
     {
       path: '/admin',
-      name: 'home',
-      component: Administration
+      name: 'admin',
+      component: administration
     },
       {
-         path:'/Schedule',
-          name: 'secondPage',
+          path: '/Schedule',
+          name: 'schedule',
           component: Schedule
+      },
+      {
+          path: '/EventManagement',
+          name: 'event',
+          component: EventManagement
       }
 
   ]

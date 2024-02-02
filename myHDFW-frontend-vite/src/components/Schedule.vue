@@ -1,11 +1,25 @@
+<template>
+
+  <div class='demo-app'>
+    <div class='demo-app-main'>
+      <FullCalendar class='demo-app-calendar' :options='calendarOptions'  >
+        <template v-slot:eventContent='arg'>
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </template>
+      </FullCalendar>
+    </div>
+  </div>
+</template>
 <script>
-import {defineComponent} from 'vue'
+import {defineComponent, ref} from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import allLocales from "@fullcalendar/core/locales-all"
 import {createEventId, INITIAL_EVENTS} from '../event-utils.js'
+
 
 export default defineComponent({
   components: {
@@ -49,10 +63,11 @@ export default defineComponent({
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
     },
-/** handleDateSelect(selectInfo) {
-      let title = prompt('Please enter a new title for your event')
-      let calendarApi = selectInfo.view.calendar
+ handleDateSelect(selectInfo) {
 
+
+      let title = prompt('Please enter a new title for your event')
+     let calendarApi = selectInfo.view.calendar
       calendarApi.unselect() // clear date selection
 
       if (title) {
@@ -65,10 +80,10 @@ export default defineComponent({
         })
       }
     },
-    */
     handleEventClick(clickInfo) {
       if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
         clickInfo.event.remove()
+
       }
     },
     handleEvents(events) {
@@ -77,19 +92,6 @@ export default defineComponent({
   }
 })
 </script>
-
-<template>
-  <div class='demo-app'>
-    <div class='demo-app-main'>
-      <FullCalendar class='demo-app-calendar' :options='calendarOptions'  >
-        <template v-slot:eventContent='arg'>
-          <b>{{ arg.timeText }}</b>
-          <i>{{ arg.event.title }}</i>
-        </template>
-      </FullCalendar>
-    </div>
-  </div>
-</template>
 
 <style lang='css' scoped>
 h2 {
@@ -131,3 +133,5 @@ fc{
 
 
 </style>
+<script setup>
+</script>
