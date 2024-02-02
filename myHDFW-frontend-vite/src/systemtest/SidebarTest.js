@@ -15,6 +15,7 @@ test('Sidebar contains all elements', async t => {
     const link3 = sidebar.find('.p-menuitem-link').withText('Kalendar');
 
     await t
+            .expect(logo.exists).ok()
             .expect(link1.exists).ok()
             .expect(link2.exists).ok()
             .expect(link3.exists).ok();
@@ -22,6 +23,7 @@ test('Sidebar contains all elements', async t => {
 
 test('Sidebar navigates correctly', async t => {
     const sidebar = Selector('.sidebar');
+    const logo = sidebar.find('.logo');
     const link1 = sidebar.find('.p-menuitem-link').withText('Startseite');
     const link2 = sidebar.find('.p-menuitem-link').withText('Administration');
     const link3 = sidebar.find('.p-menuitem-link').withText('Kalendar');
@@ -34,6 +36,7 @@ test('Sidebar navigates correctly', async t => {
             .click(link2)
             .expect(getLocation()).contains('/admin')
             .click(link3)
-            .expect(getLocation()).contains('/schedule');
+            .expect(getLocation()).contains('/schedule')
+            .click(logo())
+            .expect(getLocation()).contains('/');
 });
-
