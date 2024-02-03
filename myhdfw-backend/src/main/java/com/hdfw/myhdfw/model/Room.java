@@ -3,24 +3,22 @@ package com.hdfw.myhdfw.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Student {
+public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @NonNull
     String name;
     @NonNull
-    String surname;
-    @NonNull
-    String email;
-    @NonNull
-    String password;
-    @NonNull
-    @ManyToOne
-    StudentGroup studentGroup;
+    Integer capacity;
 
+    // -----------
+    @OneToMany(mappedBy = "room")
+    Set<Lecture> lectures;
 }

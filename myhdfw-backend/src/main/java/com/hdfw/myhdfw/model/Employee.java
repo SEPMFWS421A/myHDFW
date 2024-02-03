@@ -3,11 +3,13 @@ package com.hdfw.myhdfw.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Student {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -19,8 +21,8 @@ public class Student {
     String email;
     @NonNull
     String password;
-    @NonNull
-    @ManyToOne
-    StudentGroup studentGroup;
 
+    // -----------
+    @OneToMany(mappedBy = "employee")
+    Set<LectureSeries> lectureSeries;
 }

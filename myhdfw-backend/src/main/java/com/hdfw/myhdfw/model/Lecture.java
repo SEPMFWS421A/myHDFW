@@ -3,24 +3,28 @@ package com.hdfw.myhdfw.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Student {
+public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @NonNull
     String name;
     @NonNull
-    String surname;
+    LocalDateTime date;
     @NonNull
-    String email;
-    @NonNull
-    String password;
+    Integer duration;
+
     @NonNull
     @ManyToOne
-    StudentGroup studentGroup;
+    LectureSeries lectureSeries;
+    @NonNull
+    @ManyToOne
+    Room room;
 
 }

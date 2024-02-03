@@ -1,20 +1,26 @@
 package com.hdfw.myhdfw.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class StudentGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @NonNull
     String name;
+    @NonNull
+    @ManyToMany
+    Set<LectureSeries> lectureSeries;
+
+
+    // -----------
+    @OneToMany(mappedBy = "studentGroup")
+    Set<Student> students;
 }
