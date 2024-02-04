@@ -5,7 +5,7 @@ import {ref} from "vue";
 
 const sidebar_items = ref([
   {label: 'Startseite', icon: 'home', route: '/'},
-  {label: 'Administration', icon: 'work', route: '/eventverwaltung'},
+  {label: 'Administration', icon: 'work', route: '/administration'},
   {label: 'Kalendar', icon: 'calendar_month', route: '/schedule'},
 ]);
 
