@@ -31,6 +31,11 @@ p {
 .fc .fc-scrollgrid-shrink{
     background-color: #645FCE;
     color: white;
+    opacity: 0.85;
+}
+
+.fc .fc-col-header-cell{
+    padding: 6px;
 }
 
 .fc .fc-timegrid-axis{

@@ -2,7 +2,7 @@
   <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 
   <div class="main">
-  <h2 style="color: #6F6AF8; padding: 1px;margin-top: 30px;font-size:120%; font-family: monospace;">Zum Uni-Portal</h2>
+  <h2 style="color: #6F6AF8; padding: 1px;margin-top: 30px;font-size:150%; font-family: monospace;">Zum Uni-Portal</h2>
     <img src="../assets/students.jpg" alt="Happy Students Img">
     <h2 style="background-color: #FCFDFD; padding: 10px; margin-bottom:30px;border-radius: 10px">Die Cafeteria ist geöffnet</h2>
   </div>
@@ -71,10 +71,11 @@ h2{
 .sideview h2{
   padding: 15px 60px 10px 10px;
   margin: 1px;
-  background-color: #9598D6;
+  background-color: #6F6AF8;
   font-size: 140%;
   border-radius: 10px;
   color: white;
+  opacity: 0.85;
 }
 .sideview h4{
   margin:0;
