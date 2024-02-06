@@ -121,11 +121,6 @@
         </div>
 
         <!--
-        <div v-for="category in categories" :key="category.key" class="flex align-items-center">
-            <RadioButton v-model="selectedCategory" :inputId="category.key" name="dynamic" :value="category.name" />
-            <label :for="category.key" class="ml-2">{{ category.name }}</label>
-        </div>
-
         <div class="field">
           <label for="location">Standort</label>
           <InputText id="column_location" v-model.trim="Room.location" required="true" autofocus :class="{'p-invalid': submitted && !Room.location}" />
@@ -211,7 +206,6 @@
   
     if (Room.value.designation.trim()) {
       if (Room.value.id) {
-        // Room.value.inventoryStatus = Room.value.inventoryStatus.value ? Room.value.inventoryStatus.value : Room.value.inventoryStatus;
         Rooms.value[findIndexById(Room.value.id)] = Room.value;
         toast.add({severity:'success', summary: 'Successful', detail: 'Room Updated', life: 3000});
       }
@@ -279,6 +273,7 @@
     #location_room{
       width: 100% !important;
     }
+    
     #location_room:focus{
       width: 100% !important;
       outline: none !important;
@@ -288,10 +283,5 @@
 
     #delete_room:focus{
       box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #CFC25F, 0 1px 2px 0 black !important;
-    }
-
-    .p-checkbox .p-checkbox-box.p-highlight{
-      border-color: #645FCE !important;
-      background: #645FCE !important;
     }
   </style>
