@@ -51,12 +51,19 @@ p {
     margin: none;
 }
 
-.top_rounding{
-    height: 10%; 
+.top_rounding_admin{
+    height: 5%; 
     background-color: #ECF0F2; 
     border-top-right-radius: 20px; 
     border-top-left-radius: 20px;
 }
+
+.bottom_rounding_admin{
+    height: 2%;
+    background-color: #ECF0F2;    
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px; 
+    }
 .background_admin{
 background-color: #ECF0F2;
 }
@@ -82,12 +89,7 @@ background-color: white;
 border-color: lightgray; 
 color: black;
 }
-.bottom_admin{
-background-color: #ECF0F2;    
-border-bottom-left-radius: 20px; 
-border-bottom-right-radius: 20px; 
-height: 5%;
-}
+
 .edit_column{
     border-color: #AE5FCF; color: #AE5FCF;
 }
@@ -111,6 +113,34 @@ height: 5%;
 
 .icons_dialog{
     color: #645FCE;
+}
+
+.yes_button{
+    color: #645FCE;
+}
+
+.no_button{
+    color: #757366;
+}
+
+input:focus{
+    outline: none !important;
+    border-color: #645FCE !important;
+    box-shadow: 0 0 3px #645FCE !important;
+}
+
+textarea:focus{
+    outline: none !important;
+    border-color: #645FCE !important;
+    box-shadow: 0 0 3px #645FCE !important;
+}
+
+.p-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #645FCE, 0 1px 2px 0 black;
+}
+
+:root{
+    --primary-color: #645FCE !important
 }
 
 @mixin use-md-icon($icon) {

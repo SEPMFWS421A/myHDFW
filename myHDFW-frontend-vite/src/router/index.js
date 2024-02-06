@@ -13,11 +13,11 @@ const router = createRouter({
     },
       {
          path:'/Schedule',
-          name: 'secondPage',
-          component: Schedule
+         name: 'secondPage',
+         component: Schedule
       },
       {
-        path:'/raumverwaltung/',
+         path:'/raumverwaltung/',
          name: 'Raumverwaltung',
          component: RoomManagement
      }

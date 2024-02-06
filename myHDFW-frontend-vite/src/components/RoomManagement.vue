@@ -1,5 +1,5 @@
 <template>
-    <div class="top_rounding">
+    <div class="top_rounding_admin">
     </div>
     <div class="background_admin">
 
@@ -28,7 +28,8 @@
 
     <div>
       <div class="card">
-        <DataTable ref="dt" :value="Rooms" v-model:selection="selectedRooms" dataKey="id"
+        <DataTable id="table_rooms"
+                   ref="dt" :value="Rooms" v-model:selection="selectedRooms" dataKey="id" 
                    :paginator="true" :rows="10" :filters="filters"
                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5,10,25]"
                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} rooms">
@@ -36,7 +37,7 @@
             <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
               <span class="p-input-icon-left">
                               <i class="pi pi-search" />
-                              <InputText v-model="filters['global'].value" placeholder="Search..." />
+                              <InputText id="search_rooms" v-model="filters['global'].value" placeholder="Search..." />
                           </span>
             </div>
           </template>
@@ -68,7 +69,7 @@
             <InputGroupAddon>
                 <span class="icons_dialog">abc</span>
             </InputGroupAddon>
-            <InputText id="column_designation" v-model.trim="Room.designation" required="true" autofocus :class="{'p-invalid': submitted && !Room.designation}" />
+            <InputText id="designation_room" v-model.trim="Room.designation" required="true" autofocus :class="{'p-invalid': submitted && !Room.designation}" />
           </InputGroup>
           <small class="p-error" v-if="submitted && !Room.designation">Bezeichnung ist erforderlich!</small>
         </div>
@@ -80,9 +81,9 @@
               <InputGroupAddon>
                   <i class="pi pi-building icons_dialog"></i>
               </InputGroupAddon>
-              <InputText id="column_capacity" v-model.trim="Room.capacity" required="true" autofocus :class="{'p-invalid': submitted && !Room.capacity}" />
-              <small class="p-error" v-if="submitted && !Room.capacity">Kapazität ist erforderlich!</small>
+              <InputText id="capacity_room" v-model.trim="Room.capacity" required="true" autofocus :class="{'p-invalid': submitted && !Room.capacity}" />
             </InputGroup>
+            <small class="p-error" v-if="submitted && !Room.capacity">Kapazität ist erforderlich!</small>
           </div>
   
           <div class="field">
@@ -91,9 +92,9 @@
               <InputGroupAddon>
                   <i class="pi pi-pencil icons_dialog"></i>
               </InputGroupAddon>
-              <InputText id="column_exam_capacity" v-model.trim="Room.exam_capacity" required="true" autofocus :class="{'p-invalid': submitted && !Room.exam_capacity}" />
-              <small class="p-error" v-if="submitted && !Room.exam_capacity">Klausurkapazität ist erforderlich!</small>
+              <InputText id="capacity_exam_room" v-model.trim="Room.exam_capacity" required="true" autofocus :class="{'p-invalid': submitted && !Room.exam_capacity}" />
             </InputGroup>
+            <small class="p-error" v-if="submitted && !Room.exam_capacity">Klausurkapazität ist erforderlich!</small>
           </div>
         </div>
 
@@ -103,14 +104,20 @@
             <InputGroupAddon>
                 <i class="pi pi-info icons_dialog"></i>
             </InputGroupAddon>
-            <InputText id="equipment" v-model.trim="Room.equipment" required="true" autofocus :class="{'p-invalid': submitted && !Room.equipment}" />
-            <small class="p-error" v-if="submitted && !Room.equipment">Ausstattung ist erforderlich!</small>
+            <Textarea id="equipment_room" autoresize rows="5" v-model.trim="Room.equipment" required="true" autofocus :class="{'p-invalid': submitted && !Room.equipment}" />
           </InputGroup>
+          <small class="p-error" v-if="submitted && !Room.equipment">Ausstattung ist erforderlich!</small>
         </div>
 
         <div class="field" id="field_location">
           <label for="location">Standort</label>
-          <Dropdown id="location" v-model="Room.location" editable :options="locations" optionLabel="name" placeholder="Suche oder wähle einen Standort aus" class="w-full md:w-14rem" />
+          <InputGroup>
+            <InputGroupAddon>
+                <i class="pi pi-map-marker icons_dialog"></i>
+            </InputGroupAddon>
+            <Dropdown id="location_room" v-model="Room.location" editable :options="locations" optionLabel="name" placeholder="Suche oder wähle einen Standort aus" class="w-full md:w-14rem" />
+          </InputGroup>
+          <small class="p-error" v-if="submitted && !Room.location">Standort ist erforderlich!</small>
         </div>
 
         <!--
@@ -127,37 +134,37 @@
         -->
 
         <template #footer>
-          <Button id="cancel_add_room" class="cancel_dialog" label="Cancel" icon="pi pi-times" text @click="hideDialog"/>
-          <Button id="add_room" class="save_dialog" label="Save" icon="pi pi-check" text @click="saveRoom" />
+          <Button id="add_room_cancel" class="cancel_dialog" label="Abbrechen" icon="pi pi-times" text @click="hideDialog"/>
+          <Button id="add_room_save" class="save_dialog" label="Speichern" icon="pi pi-check" text @click="saveRoom" />
         </template>
       </Dialog>
   
       <!--Dialog zum löschen-->
-      <Dialog v-model:visible="deleteRoomDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+      <Dialog v-model:visible="deleteRoomDialog" :style="{width: '450px'}" header="Bestätigen" :modal="true">
         <div class="confirmation-content">
           <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-          <span v-if="Room">Bist du sicher den Raum löschen zu wollen?<b>{{Room.designation}}</b>?</span>
+          <span v-if="Room">Bist du sicher den Raum <b>{{Room.designation}}</b> löschen zu wollen?</span>
         </div>
         <template #footer>
-          <Button id="cancel_delete_room" label="No" icon="pi pi-times" text @click="deleteRoomDialog = false"/>
-          <Button id="delete_room" label="Yes" icon="pi pi-check" text @click="deleteRoom" />
+          <Button id="cancel_delete_room_dialog" class="no_button" label="Nein" icon="pi pi-times" text @click="deleteRoomDialog = false"/>
+          <Button id="delete_room_dialog" class="yes_button" label="Ja" icon="pi pi-check" text @click="deleteRoom" />
         </template>
       </Dialog>
       
       <!--Dialog zum mehrfach löschen-->
-      <Dialog v-model:visible="deleteRoomsDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+      <Dialog v-model:visible="deleteRoomsDialog" :style="{width: '450px'}" header="Bestätigen" :modal="true">
         <div class="confirmation-content">
           <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
           <span v-if="Room">Bist du sicher die Räume zu löschen?</span>
         </div>
         <template #footer>
-          <Button id="cancel_delete_rooms" label="No" icon="pi pi-times" text @click="deleteRoomsDialog = false"/>
-          <Button id="delete_rooms" label="Yes" icon="pi pi-check" text @click="deleteSelectedRooms" />
+          <Button id="cancel_delete_rooms_dialog" class="no_button" label="Nein" icon="pi pi-times" text @click="deleteRoomsDialog = false"/>
+          <Button id="delete_rooms_dialog" class="yes_button" label="Ja" icon="pi pi-check" text @click="deleteSelectedRooms" />
         </template>
       </Dialog>
     </div>
    </div>
-   <div class="bottom_admin">
+   <div class="bottom_rounding_admin">
    </div>
   </template>
   
@@ -204,12 +211,12 @@
   
     if (Room.value.designation.trim()) {
       if (Room.value.id) {
-        Room.value.inventoryStatus = Room.value.inventoryStatus.value ? Room.value.inventoryStatus.value : Room.value.inventoryStatus;
+        // Room.value.inventoryStatus = Room.value.inventoryStatus.value ? Room.value.inventoryStatus.value : Room.value.inventoryStatus;
         Rooms.value[findIndexById(Room.value.id)] = Room.value;
         toast.add({severity:'success', summary: 'Successful', detail: 'Room Updated', life: 3000});
       }
       else {
-        Room.value.id = createId();
+        Room.value.id           = createId();
         Room.value.code = createId();
         Room.value.image = 'Room-placeholder.svg';
         Room.value.inventoryStatus = Room.value.inventoryStatus ? Room.value.inventoryStatus.value : 'INSTOCK';
@@ -261,7 +268,7 @@
     deleteRoomsDialog.value = true;
   };
   const deleteSelectedRooms = () => {
-    Rooms.value = rooms.value.filter(val => !selectedRooms.value.includes(val));
+    Rooms.value = Rooms.value.filter(val => !selectedRooms.value.includes(val));
     deleteRoomsDialog.value = false;
     selectedRooms.value = null;
     toast.add({severity:'success', summary: 'Successful', detail: 'Rooms Deleted', life: 3000});
@@ -269,7 +276,22 @@
   </script>
 
   <style scoped>
-    #location{
+    #location_room{
       width: 100% !important;
+    }
+    #location_room:focus{
+      width: 100% !important;
+      outline: none !important;
+      border-color: #645FCE !important;
+      box-shadow: 0 0 3px #645FCE !important;
+    }
+
+    #delete_room:focus{
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #CFC25F, 0 1px 2px 0 black !important;
+    }
+
+    .p-checkbox .p-checkbox-box.p-highlight{
+      border-color: #645FCE !important;
+      background: #645FCE !important;
     }
   </style>
