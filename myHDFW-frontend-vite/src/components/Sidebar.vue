@@ -13,12 +13,11 @@ const sidebar_items = ref([
 
 <template>
   <div class="sidebar">
-    <div class="sidebar-header">
-      <RouterLink to="/">
+    <router-link to="/">
+      <div class="sidebar-header">
         <img class="logo" src="../assets/hdfw.png" alt="Logo"/>
-      </RouterLink>
-
-    </div>
+      </div>
+    </router-link>
     <div class="sidebar-menu">
       <Menu :model="sidebar_items">
         <template #item="{ item, props }">
