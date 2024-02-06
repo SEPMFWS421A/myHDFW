@@ -6,7 +6,7 @@
     <Card style="width: 35rem; overflow: hidden; margin: auto;">
       <template #header>
         <RouterLink to="/Schedule/">
-          <img id="nav_card_image" class="nav_card_image" alt="user header" src="https://www.delegia.se/wp-content/uploads/2018/10/Produkt_Bordsplacering.jpg" />
+          <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Eventverwaltung.png" />
         </RouterLink>
       </template>
       <template #title> <span class="nav_card_title">Eventverwaltung</span><Button id="add_event" class="help_button" label="" icon="pi pi-question-circle"/>

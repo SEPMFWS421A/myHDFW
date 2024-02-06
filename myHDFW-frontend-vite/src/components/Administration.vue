@@ -15,7 +15,7 @@
         <Card style="width: 30rem; overflow: hidden;" >
           <template #header>
             <RouterLink to="/Eventverwaltung/">
-            <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Eventverwaltung.jpg" />
+            <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Eventverwaltung.png" />
             </RouterLink>
           </template>
           <template #title>Eventverwaltung</template>
