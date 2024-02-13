@@ -77,6 +77,7 @@ h2{
   border-radius: 10px;
   filter: drop-shadow(0px 5px 0px lightgray);
 }
+
 .main h2{
   text-align: center;
   margin: 25px;
