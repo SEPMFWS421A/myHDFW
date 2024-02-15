@@ -24,6 +24,125 @@ p {
     line-height: 1.75;
 }
 
+.p-panel{
+    border-radius: 200px;
+}
+
+.p-panel-header{
+    background-color: white;
+    border-bottom: none;
+}
+
+.p-panel-title{
+    margin: auto;
+}
+
+.p-panel-content{
+    text-align: center;
+}
+
+.card{
+    background-color: #ECF0F2;
+    margin: 0px;
+}
+
+.p-card-content{
+    padding: none;
+    margin: none;
+}
+
+.top_rounding_admin{
+    height: 5%; 
+    background-color: #ECF0F2; 
+    border-top-right-radius: 20px; 
+    border-top-left-radius: 20px;
+}
+
+.bottom_rounding_admin{
+    height: 2%;
+    background-color: #ECF0F2;    
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px; 
+    }
+.background_admin{
+background-color: #ECF0F2;
+}
+.nav_card_image{ 
+height: 20%; width: 100%; 
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.nav_card_title{
+text-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+color: #645FCE;
+}
+.add_room{
+background-color: #645FCE; 
+border-color: white;
+}
+.delete_room{
+background-color: #CFC25F; 
+border-color: white;
+}
+.help_button{
+left: 50%; 
+background-color: white; 
+border-color: lightgray; 
+color: black;
+}
+
+.edit_column{
+    border-color: #AE5FCF; color: #AE5FCF;
+}
+.delete_column{
+    border-color: #CFC25F; color: #CFC25F;
+}
+
+.cancel_dialog{
+    color: #757366;
+}
+
+.save_dialog{
+    color: #645FCE;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+.p-dialog-title{
+    color: #645FCE;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+.icons_dialog{
+    color: #645FCE;
+}
+
+.yes_button{
+    color: #645FCE;
+}
+
+.no_button{
+    color: #757366;
+}
+
+input:focus{
+    outline: none !important;
+    border-color: #645FCE !important;
+    box-shadow: 0 0 3px #645FCE !important;
+}
+
+textarea:focus{
+    outline: none !important;
+    border-color: #645FCE !important;
+    box-shadow: 0 0 3px #645FCE !important;
+}
+
+.p-button:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #645FCE, 0 1px 2px 0 black;
+}
+
+:root{
+    --primary-color: #645FCE !important
+}
+
 @mixin use-md-icon($icon) {
     font-family: 'Material Icons';
     font-weight: normal;
