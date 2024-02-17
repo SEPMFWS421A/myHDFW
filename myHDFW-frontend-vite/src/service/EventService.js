@@ -7,7 +7,7 @@ export const EventService = {
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden',
+                date: '17.02.2024',
                 location: 'Mettmann'
             },
             {
@@ -16,7 +16,7 @@ export const EventService = {
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden',
+                date: '17.02.2024',
                 location: 'Mettmann'
             },
             {
@@ -25,7 +25,7 @@ export const EventService = {
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden',
+                date: '17.02.2024',
                 location: 'Mettmann'
             },
             {
@@ -34,7 +34,7 @@ export const EventService = {
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden',
+                date: '17.02.2024',
                 location: 'Mettmann'
             },
             {
@@ -43,7 +43,7 @@ export const EventService = {
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden',
+                date: '17.02.2024',
                 location: 'Mettmann'
             },
             {
@@ -52,7 +52,7 @@ export const EventService = {
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden',
+                date: '17.02.2024',
                 location: 'Mettmann'
             },
         ];

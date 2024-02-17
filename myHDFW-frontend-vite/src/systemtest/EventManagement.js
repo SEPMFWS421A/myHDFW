@@ -33,10 +33,10 @@ test('Event hinzufügen', async t => {
     await t
             .click(addEvent)
             .typeText(designationSelector   , testEventAdd)
-            .typeText('#capacity_event'      , '30')
             .typeText('#starting_point' , '10:00')
             .typeText('#end_point'     , '12:30')
-            .typeText('#duration'     , '2,5 Stunden')
+            .typeText('#capacity_event'      , '30')
+            .typeText('#date'     , '17.02.2024')
             .typeText('#location_event'      , 'Mettmann')
             .click(EventSave)
             .typeText(searchEvents, testEventAdd, { replace: true})
