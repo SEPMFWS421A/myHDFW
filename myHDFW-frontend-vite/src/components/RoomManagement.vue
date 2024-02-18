@@ -284,4 +284,13 @@
     #delete_room:focus{
       box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #CFC25F, 0 1px 2px 0 black !important;
     }
+
+    .add_room{
+      background-color: #645FCE; 
+      border-color: white;
+    }
+    .delete_room{
+      background-color: #CFC25F; 
+      border-color: white;
+    }
   </style>
