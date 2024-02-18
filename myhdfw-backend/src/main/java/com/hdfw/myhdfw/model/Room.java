@@ -23,6 +23,11 @@ public class Room {
     @Column(name = "capacity")
     Integer capacity;
 
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    Location location;
+
     // -----------
     @JsonIgnore
     @OneToMany(mappedBy = "room")
