@@ -15,7 +15,7 @@ jobs:
         working-directory: myHDFW-frontend-vite
     strategy:
       matrix:
-        node-version: [18.19.0]
+        node-version: [ 18.19.0 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
