@@ -31,13 +31,8 @@ const toggleNotifications = (event) => {
 
 <template>
   <div class="header-container">
-    <div class="header-name">{{ user.name }}</div>
     <div class="header-right-menu">
-      <div class="notifications">
-        <i class="pi pi-bell" style="font-size: 2rem" @click="toggleNotifications" aria-controls="overlay_menu"></i>
-        <Menu ref="notificationsMenu" id="overlay_menu" :model="notificationsMenuItems" :popup="true">
-        </Menu>
-      </div>
+      <div class="header-name">{{ user.name }}</div>
       <div class="profile">
         <i class="pi pi-user" style="font-size: 2rem" @click="toggleProfile" aria-controls="overlay_menu"></i>
         <Menu ref="profileMenu" id="overlay_menu" :model="profileMenuItems" :popup="true" class="profile-menu">
@@ -52,6 +47,11 @@ const toggleNotifications = (event) => {
           </template>
         </Menu>
       </div>
+      <div class="notifications">
+        <i class="pi pi-bell" style="font-size: 2rem" @click="toggleNotifications" aria-controls="overlay_menu"></i>
+        <Menu ref="notificationsMenu" id="overlay_menu" :model="notificationsMenuItems" :popup="true">
+        </Menu>
+      </div>
     </div>
 
   </div>
@@ -60,15 +60,15 @@ const toggleNotifications = (event) => {
 <style scoped>
 .header-container {
   display: flex;
-  justify-content: space-between;
   width: 100%;
-  align-items: center;
+  justify-content: flex-end
 }
 
 .header-right-menu {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .notifications, .profile {
