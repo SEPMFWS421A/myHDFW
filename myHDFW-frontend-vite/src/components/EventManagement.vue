@@ -43,10 +43,10 @@
           </template>
           <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
           <Column field="designation" header="Bezeichnung" sortable style="min-width:12rem"></Column>
-          <Column field="capacity" header="Kapazität" sortable style="min-width:16rem"></Column>
           <Column field="starting_point" header="Startpunkt" sortable style="min-width:10rem"></Column>
           <Column field="end_point" header="Endpunkt" sortable style="min-width:10rem"></Column>
-          <Column field="duration" header="Dauer" sortable style="min-width:10rem"></Column>
+          <Column field="capacity" header="Kapazität" sortable style="min-width:16rem"></Column>
+          <Column field="date" header="Datum" sortable style="min-width:10rem"></Column>
           <Column field="location" header="Standort" sortable style="min-width:10rem">
             <template #body="slotProps">
               <Tag :value="slotProps.data.location" />
@@ -76,16 +76,6 @@
         </div>
 
         <div class="flex gap-3">
-          <div class="field">
-            <label for="capacity">Kapazität</label>
-            <InputGroup>
-              <InputGroupAddon>
-                <i class="pi pi-building icons_dialog"></i>
-              </InputGroupAddon>
-              <InputText id="capacity_event" v-model.trim="Event.capacity" required="true" autofocus :class="{'p-invalid': submitted && !Event.capacity}" />
-            </InputGroup>
-            <small class="p-error" v-if="submitted && !Event.capacity">Kapazität ist erforderlich!</small>
-          </div>
 
           <div class="field">
             <label for="starting_point">Startpunkt</label>
@@ -97,7 +87,7 @@
             </InputGroup>
             <small class="p-error" v-if="submitted && !Event.starting_point">Ein Startpunkt ist erforderlich!</small>
           </div>
-        </div>
+
 
         <div class="field">
           <label for="end_point">Endpunkt</label>
@@ -109,17 +99,30 @@
           </InputGroup>
           <small class="p-error" v-if="submitted && !Event.end_point">Ein Endpunkt ist erforderlich!</small>
         </div>
+        </div>
+
+
+          <div class="field">
+            <label for="capacity">Kapazität</label>
+            <InputGroup>
+              <InputGroupAddon>
+                <i class="pi pi-building icons_dialog"></i>
+              </InputGroupAddon>
+              <InputText id="capacity_event" v-model.trim="Event.capacity" required="true" autofocus :class="{'p-invalid': submitted && !Event.capacity}" />
+            </InputGroup>
+            <small class="p-error" v-if="submitted && !Event.capacity">Kapazität ist erforderlich!</small>
+          </div>
 
 
     <div class="field">
-      <label for="duration">Dauer</label>
+      <label for="date">Datum</label>
       <InputGroup>
         <InputGroupAddon>
           <i class="pi pi-pencil icons_dialog"></i>
         </InputGroupAddon>
-        <InputText id="duration" v-model.trim="Event.duration" required="true" autofocus :class="{'p-invalid': submitted && !Event.duration}" />
+        <InputText id="date" v-model.trim="Event.date" required="true" autofocus :class="{'p-invalid': submitted && !Event.date}" />
       </InputGroup>
-      <small class="p-error" v-if="submitted && !Event.starting_point">Eine Dauer ist erforderlich!</small>
+      <small class="p-error" v-if="submitted && !Event.date">Ein Datum ist erforderlich!</small>
     </div>
 
         <div class="field" id="field_location">
