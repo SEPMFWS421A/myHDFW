@@ -73,6 +73,9 @@ export default defineComponent({
           left: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         initialView: 'dayGridMonth',
+        expandRows: true,
+        slotMinTime: '08:00:00',
+        slotMaxTime: '20:00:00',
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
