@@ -6,11 +6,11 @@
     <Card style="width: 35rem; overflow: hidden; margin: auto;">
       <template #header>
         <RouterLink to="/Schedule/">
-          <img id="nav_card_image" class="nav_card_image" alt="user header" src="https://www.bmel.de/SharedDocs/Bilder/DE/_Tiere/Haus-Zootiere/tierschutz-hunde.jpg?__blob=wide&v=3" />
+          <img id="nav_card_image" class="nav_card_image" alt="user header" src="@\assets\Studentenverwaltung.jpg" />
         </RouterLink>
       </template>
       <template #title> 
-        <span class="nav_card_title">Nutzerverwaltung</span>
+        <span class="nav_card_title">Studentenverwaltung</span>
         <Button id="help_button_user" class="help_button" label="" icon="pi pi-question-circle" v-tooltip="{ value: 'Confirm to proceed', showDelay: 1000, hideDelay: 300 }"/>
       </template>
       <template #content>

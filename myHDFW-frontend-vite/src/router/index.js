@@ -30,8 +30,8 @@ const router = createRouter({
          component: RoomManagement
       },
       {
-         path:'/nutzerverwaltung/',
-         name: 'Nutzerverwaltung',
+         path:'/studentenverwaltung/',
+         name: 'Studentenverwaltung',
          component: UserManagement
       },
       {

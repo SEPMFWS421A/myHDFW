@@ -27,7 +27,7 @@ const testUserEditNew       = 'XXXX';
 
 
 fixture('Nutzer Management - Create, Update and Delete')
-    .page('http://localhost:5173/nutzerverwaltung/');
+    .page('http://localhost:5173/studentenverwaltung/');
     
     test('Nutzer hinzufügen', async t => {
         await t
