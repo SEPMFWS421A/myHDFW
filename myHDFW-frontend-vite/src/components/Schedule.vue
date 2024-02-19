@@ -10,6 +10,37 @@
       </FullCalendar>
     </div>
   </div>
+  <Dialog v-model:visible="visible" modal header="Update Event" :style="{ width: '30rem' }">
+  <span class="p-text-secondary block mb-5">Update your Event information</span>
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="designation" class="font-semibold w-7rem">Bezeichnung</label>
+    <InputText id="designation" class="flex-auto" autocomplete="off" />
+  </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="date" class="font-semibold w-7rem">Datum</label>
+      <InputText id="date" class="flex-auto" autocomplete="off" />
+    </div>
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="capacity" class="font-semibold w-7rem">Kapazität</label>
+    <InputText id="capacity" class="flex-auto" autocomplete="off" />
+  </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="starting_point" class="font-semibold w-7rem">Start</label>
+      <InputText id="starting_point" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="end_point" class="font-semibold w-7rem">Ende</label>
+      <InputText id="end_point" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="duration" class="font-semibold w-7rem">Dauer</label>
+      <InputText id="duration" class="flex-auto" autocomplete="off" />
+    </div>
+  <div class="flex justify-content-end gap-2">
+    <Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
+    <Button type="button" label="Save" @click="visible = false"></Button>
+  </div>
+  </Dialog>
 </template>
 <script>
 import {defineComponent, ref} from 'vue'
@@ -27,6 +58,7 @@ export default defineComponent({
   },
   data() {
     return {
+      visible: false,
       calendarOptions: {
         plugins: [
           dayGridPlugin,
@@ -65,12 +97,13 @@ export default defineComponent({
     },
  handleDateSelect(selectInfo) {
 
-
-      let title = prompt('Please enter a new title for your event')
-     let calendarApi = selectInfo.view.calendar
+      this.visible = true
+      console.log(this.visible)
+      //let title = prompt('Please enter a new title for your event')
+      let calendarApi = selectInfo.view.calendar
       calendarApi.unselect() // clear date selection
 
-      if (title) {
+      /*if (title) {
         calendarApi.addEvent({
           id: createEventId(),
           title,
@@ -79,6 +112,7 @@ export default defineComponent({
           allDay: selectInfo.allDay
         })
       }
+      */
     },
     handleEventClick(clickInfo) {
       if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {

@@ -1,16 +1,3 @@
-<script setup>
-import Menu from 'primevue/menu';
-import {ref} from "vue";
-
-
-const sidebar_items = ref([
-  {label: 'Startseite', icon: 'home', route: '/'},
-  {label: 'Administration', icon: 'work', route: '/admin'},
-  {label: 'Kalendar', icon: 'calendar_month', route: '/schedule'},
-]);
-
-</script>
-
 <template>
   <div class="sidebar">
     <div class="sidebar-header">
@@ -36,6 +23,19 @@ const sidebar_items = ref([
     </div>
   </div>
 </template>
+
+<script setup>
+import Menu from 'primevue/menu';
+import {ref} from "vue";
+
+const sidebar_items = ref([
+  {label: 'Startseite', icon: 'home', route: '/'},
+  {label: 'Administration', icon: 'work', route: '/admin'},
+  {label: 'Kalendar', icon: 'calendar_month', route: '/schedule'},
+]);
+
+</script>
+
 
 <style scoped>
 .sidebar-menu {
