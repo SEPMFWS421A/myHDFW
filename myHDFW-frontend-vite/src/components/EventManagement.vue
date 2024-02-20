@@ -290,6 +290,15 @@ const deleteSelectedEvents = () => {
   box-shadow: 0 0 3px #645FCE !important;
 }
 
+.add_event{
+      background-color: #645FCE; 
+      border-color: white;
+}
+.delete_event{
+      background-color: #CFC25F; 
+      border-color: white;
+}
+
 
 #delete_event:focus{
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #CFC25F, 0 1px 2px 0 black !important;

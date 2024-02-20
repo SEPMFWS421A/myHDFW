@@ -4,9 +4,11 @@
       <div class="Raumverwaltung">
         <Card style="width: 30rem; overflow: hidden">
           <template #header>
-            <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Raumverwaltung.jpg" />
+            <RouterLink to="/raumverwaltung/">
+              <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Raumverwaltung.jpg" />
+            </RouterLink>
           </template>
-          <template #title>Raumverwaltung</template>
+          <template #title><span class="nav_card_title">Raumverwaltung</span></template>
           <template #subtitle>Räume anlegen und löschen</template>
         </Card>
       </div>
@@ -18,7 +20,7 @@
             <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Eventverwaltung.png" />
             </RouterLink>
           </template>
-          <template #title>Eventverwaltung</template>
+          <template #title><span class="nav_card_title">Eventverwaltung</span></template>
           <template #subtitle>Events anlegen und löschen</template>
         </Card>
       </div>
@@ -28,9 +30,9 @@
       <div class="Prüfungsverwaltung">
         <Card style="width: 30rem; overflow: hidden">
           <template #header>
-            <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Prüfungsverwaltung.jpg" />
+             <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Prüfungsverwaltung.jpg" />
           </template>
-          <template #title>Prüfungsverwaltung</template>
+          <template #title><span class="nav_card_title">Prüfungsverwaltung</span></template>
           <template #subtitle>Prüfungen anlegen und löschen</template>
         </Card>
       </div>
@@ -38,9 +40,11 @@
       <div class="Studentenverwaltung">
         <Card style="width: 30rem; overflow: hidden">
           <template #header>
-            <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Studentenverwaltung.jpg" />
+            <RouterLink to="/studentenverwaltung/">
+              <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Studentenverwaltung.jpg" />
+            </RouterLink>
           </template>
-          <template #title>Studentenverwaltung</template>
+          <template #title><span class="nav_card_title">Studentenverwaltung</span></template>
           <template #subtitle>Studenten anlegen und löschen</template>
         </Card>
       </div>

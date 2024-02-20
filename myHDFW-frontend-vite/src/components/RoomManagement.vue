@@ -7,7 +7,7 @@
       <template #header>
         <RouterLink to="/Schedule/">
           <img id="nav_card_image" class="nav_card_image" alt="user header"
-               src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/77f1f60f-2b47-4c08-9c95-df986efe8c7f/dd6yq9v-c9929aee-c4c8-4f67-a54f-44a96a49b8a3.png/v1/fill/w_1024,h_576,q_80,strp/visual_novel_background__classroom_by_kjkjmulo_dd6yq9v-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzc3ZjFmNjBmLTJiNDctNGMwOC05Yzk1LWRmOTg2ZWZlOGM3ZlwvZGQ2eXE5di1jOTkyOWFlZS1jNGM4LTRmNjctYTU0Zi00NGE5NmE0OWI4YTMucG5nIiwiaGVpZ2h0IjoiPD01NzYiLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS53YXRlcm1hcmsiXSwid21rIjp7InBhdGgiOiJcL3dtXC83N2YxZjYwZi0yYjQ3LTRjMDgtOWM5NS1kZjk4NmVmZThjN2ZcL2tqa2ptdWxvLTQucG5nIiwib3BhY2l0eSI6OTUsInByb3BvcnRpb25zIjowLjQ1LCJncmF2aXR5IjoiY2VudGVyIn19.tlNsovwcY-weMtUeKVrIOcyOaPdhKWG2SONVOx_dmPE"/>
+               src="@\assets\Raumverwaltung.jpg"/>
         </RouterLink>
       </template>
       <template #title>
@@ -286,18 +286,30 @@ const deleteSelectedRooms = () => {
 </script>
 
 <style scoped>
-#location_room {
-  width: 100% !important;
-}
+    #delete_room:focus{
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #CFC25F, 0 1px 2px 0 black !important;
+    }
 
-#location_room:focus {
-  width: 100% !important;
-  outline: none !important;
-  border-color: #645FCE !important;
-  box-shadow: 0 0 3px #645FCE !important;
-}
+    .add_room{
+      background-color: #645FCE; 
+      border-color: white;
+    }
+    .delete_room{
+      background-color: #CFC25F; 
+      border-color: white;
+    }
+    #location_room {
+      width: 100% !important;
+    }
 
-#delete_room:focus {
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #CFC25F, 0 1px 2px 0 black !important;
-}
+    #location_room:focus {
+      width: 100% !important;
+      outline: none !important;
+      border-color: #645FCE !important;
+      box-shadow: 0 0 3px #645FCE !important;
+    }
+
+    #delete_room:focus {
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #CFC25F, 0 1px 2px 0 black !important;
+    }
 </style>
