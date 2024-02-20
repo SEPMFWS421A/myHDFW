@@ -3,98 +3,58 @@ export const EventService = {
         return [
             {
                 id: '1000',
-                designation: 'Business Knigge',
+                designation: 'Business Knigge 0',
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden'
+                date: '17.02.2024',
+                location: 'Mettmann'
             },
             {
-                id: '1000',
-                designation: 'Business Knigge',
+                id: '1001',
+                designation: 'Business Knigge 1',
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden'
+                date: '17.02.2024',
+                location: 'Mettmann'
             },
             {
-                id: '1000',
-                designation: 'Business Knigge',
+                id: '1002',
+                designation: 'Business Knigge 2',
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden'
+                date: '17.02.2024',
+                location: 'Mettmann'
             },
             {
-                id: '1000',
-                designation: 'Business Knigge',
+                id: '1003',
+                designation: 'Business Knigge 3',
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden'
+                date: '17.02.2024',
+                location: 'Mettmann'
             },
             {
-                id: '1000',
-                designation: 'Business Knigge',
+                id: '1004',
+                designation: 'Business Knigge 4',
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden'
+                date: '17.02.2024',
+                location: 'Mettmann'
             },
             {
-                id: '1000',
-                designation: 'Business Knigge',
+                id: '1005',
+                designation: 'Business Knigge 5',
                 capacity: '30',
                 starting_point: '10:00',
                 end_point: '12:30',
-                duration: '2,5 Stunden'
+                date: '17.02.2024',
+                location: 'Mettmann'
             },
-            {
-                id: '1000',
-                designation: 'Business Knigge',
-                capacity: '30',
-                starting_point: '10:00',
-                end_point: '12:30',
-                duration: '2,5 Stunden'
-            },{
-                id: '1000',
-                designation: 'Business Knigge',
-                capacity: '30',
-                starting_point: '10:00',
-                end_point: '12:30',
-                duration: '2,5 Stunden'
-            },{
-                id: '1000',
-                designation: 'Business Knigge',
-                capacity: '30',
-                starting_point: '10:00',
-                end_point: '12:30',
-                duration: '2,5 Stunden'
-            },{
-                id: '1000',
-                designation: 'Business Knigge',
-                capacity: '30',
-                starting_point: '10:00',
-                end_point: '12:30',
-                duration: '2,5 Stunden'
-            },
-            {
-                id: '1000',
-                designation: 'Business Knigge',
-                capacity: '30',
-                starting_point: '10:00',
-                end_point: '12:30',
-                duration: '2,5 Stunden'
-            },
-            {
-                id: '1000',
-                designation: 'Business Knigge',
-                capacity: '30',
-                starting_point: '10:00',
-                end_point: '12:30',
-                duration: '2,5 Stunden'
-            },
-
         ];
     },
 
@@ -102,3 +62,4 @@ export const EventService = {
         return Promise.resolve(this.getRoomsData());
     }
 };
+

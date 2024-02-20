@@ -1,8 +1,10 @@
 <template>
   <div class="sidebar">
-    <div class="sidebar-header">
-      <img class="logo" src="../assets/hdfw.png" alt="Logo"/>
-    </div>
+    <router-link to="/">
+      <div class="sidebar-header">
+        <img class="logo" src="../assets/hdfw.png" alt="Logo"/>
+      </div>
+    </router-link>
     <div class="sidebar-menu">
       <Menu :model="sidebar_items">
         <template #item="{ item, props }">

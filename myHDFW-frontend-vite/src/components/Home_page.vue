@@ -14,13 +14,13 @@
   </div>
   <div class="sideview">
     <h4>Uni Konto:</h4>
-    <h2>$14.032.22</h2>
+    <h2>€13.52</h2>
     <br>
     <h4>Datum:</h4>
-    <h2>31.01.2024</h2>
+    <h2>{{currentDate}}</h2>
     <br>
     <h4>Uhrzeit:</h4>
-    <h2>12:09:00</h2>
+    <h2>{{currentTime}}</h2>
   </div>
 </template>
 
@@ -28,9 +28,36 @@
 export default {
   data() {
     return {
-
+      currentTime: '',
+      currentDate: '',
     };
-  }
+  },
+
+  mounted() {
+    this.updateTime();
+    setInterval(() => {
+      this.updateTime();
+    }, 1000);
+  },
+  methods: {
+    updateTime() {
+      const now = new Date();
+      this.currentTime = this.formatTime(now);
+      this.currentDate = this.formatDate(now);
+    },
+    formatTime(date) {
+      return `${this.padZero(date.getHours())}:${this.padZero(date.getMinutes())}:${this.padZero(date.getSeconds())}`;
+    },
+
+    formatDate(date) {
+      return `${this.padZero(date.getDate())}.${this.padZero(date.getMonth() +1 )}.${date.getFullYear()}`;
+    },
+
+    padZero(num) {
+      return num.toString().padStart(2, "0");
+    },
+  },
+
 };
 </script>
 
@@ -50,6 +77,7 @@ h2{
   border-radius: 10px;
   filter: drop-shadow(0px 5px 0px lightgray);
 }
+
 .main h2{
   text-align: center;
   margin: 25px;
