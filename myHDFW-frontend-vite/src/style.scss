@@ -131,6 +131,32 @@ textarea:focus{
     box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #645FCE, 0 1px 2px 0 black;
 }
 
+.fc .fc-col-header,
+.fc .fc-timegrid-axis-frame,
+.fc .fc-timegrid-slot-label,
+.fc .fc-scrollgrid-shrink{
+    background-color: #645FCE;
+    color: white;
+    opacity: 0.85;
+}
+
+.fc .fc-col-header-cell{
+    padding: 6px;
+}
+
+.fc .fc-timegrid-axis{
+    background-color: #F5F5F5;
+}
+.fc .fc-button-primary {
+    background-color: #645FCE;
+    font-size: 20px;
+}
+.fc .fc-toolbar-title{
+    font-family: 'Inter';
+    font-size: 250%;
+}
+
+
 :root{
     --primary-color: #645FCE !important
 }
@@ -162,4 +188,6 @@ textarea:focus{
     &:before {
         content: $icon;
     }
+
+
 }

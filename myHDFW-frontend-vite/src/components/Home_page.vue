@@ -68,7 +68,7 @@ h2{
 
 .main{
   background-color: #ECF0F2;
-  width: 400px;
+  width: 50%;
   margin:0 auto;
   position: absolute;
   top: 50%;
