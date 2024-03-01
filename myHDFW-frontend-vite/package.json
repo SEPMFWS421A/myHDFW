@@ -20,13 +20,14 @@
         "@fullcalendar/vue3": "^6.1.10",
         "bootstrap-vue": "^2.23.1",
         "event-utils": "^2.1.0",
-        "primeflex": "^3.3.1",
+        "primeflex": "^3.0.1",
         "primeicons": "^6.0.1",
         "primevue": "^3.46.0",
         "vue": "^3.3.11",
         "vue-router": "^4.2.5"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.23.3",
         "@vitejs/plugin-vue": "^4.5.2",
         "@vue/test-utils": "^2.4.3",
         "jsdom": "^23.0.1",

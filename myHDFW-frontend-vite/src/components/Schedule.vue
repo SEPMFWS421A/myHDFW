@@ -1,10 +1,56 @@
+<template>
+
+  <div class='demo-app'>
+    <div class='demo-app-main'>
+      <FullCalendar class='demo-app-calendar' :options='calendarOptions'  >
+        <template v-slot:eventContent='arg'>
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </template>
+      </FullCalendar>
+    </div>
+  </div>
+  <Dialog v-model:visible="visible" modal header="Update Event" :style="{ width: '30rem' }">
+  <span class="p-text-secondary block mb-5">Update your Event information</span>
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="designation" class="font-semibold w-7rem">Bezeichnung</label>
+    <InputText id="designation" class="flex-auto" autocomplete="off" />
+  </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="date" class="font-semibold w-7rem">Datum</label>
+      <InputText id="date" class="flex-auto" autocomplete="off" />
+    </div>
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="capacity" class="font-semibold w-7rem">Kapazität</label>
+    <InputText id="capacity" class="flex-auto" autocomplete="off" />
+  </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="starting_point" class="font-semibold w-7rem">Start</label>
+      <InputText id="starting_point" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="end_point" class="font-semibold w-7rem">Ende</label>
+      <InputText id="end_point" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+      <label for="duration" class="font-semibold w-7rem">Dauer</label>
+      <InputText id="duration" class="flex-auto" autocomplete="off" />
+    </div>
+  <div class="flex justify-content-end gap-2">
+    <Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
+    <Button type="button" label="Save" @click="visible = false"></Button>
+  </div>
+  </Dialog>
+</template>
 <script>
-import {defineComponent} from 'vue'
+import {defineComponent, ref} from 'vue'
 import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import allLocales from "@fullcalendar/core/locales-all"
 import {createEventId, INITIAL_EVENTS} from '../event-utils.js'
+
 
 export default defineComponent({
   components: {
@@ -12,18 +58,24 @@ export default defineComponent({
   },
   data() {
     return {
+      visible: false,
       calendarOptions: {
         plugins: [
           dayGridPlugin,
           timeGridPlugin,
           interactionPlugin // needed for dateClick
         ],
+        locale: 'de',
+        locales: allLocales,
         headerToolbar: {
-          left: 'prev,next today',
+          right: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          left: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
         initialView: 'dayGridMonth',
+        expandRows: true,
+        slotMinTime: '08:00:00',
+        slotMaxTime: '20:00:00',
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
@@ -46,13 +98,15 @@ export default defineComponent({
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
     },
-    handleDateSelect(selectInfo) {
-      let title = prompt('Please enter a new title for your event')
-      let calendarApi = selectInfo.view.calendar
+ handleDateSelect(selectInfo) {
 
+      this.visible = true
+      console.log(this.visible)
+      //let title = prompt('Please enter a new title for your event')
+      let calendarApi = selectInfo.view.calendar
       calendarApi.unselect() // clear date selection
 
-      if (title) {
+      /*if (title) {
         calendarApi.addEvent({
           id: createEventId(),
           title,
@@ -61,10 +115,12 @@ export default defineComponent({
           allDay: selectInfo.allDay
         })
       }
+      */
     },
     handleEventClick(clickInfo) {
       if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
         clickInfo.event.remove()
+
       }
     },
     handleEvents(events) {
@@ -72,57 +128,9 @@ export default defineComponent({
     },
   }
 })
-
 </script>
 
-<template>
-  <div class='demo-app'>
-    <div class='demo-app-sidebar'>
-      <div class='demo-app-sidebar-section'>
-        <h2>Einführung</h2>
-        <ul>
-          <li>Wählen Sie ein Datum aus, um ein Event zu erstellen</li>
-          <li>Verschiebe Events nach belieben</li>
-          <li>Klicke ein Event um dieses zu löschen</li>
-        </ul>
-      </div>
-      <div class='demo-app-sidebar-section'>
-        <label>
-          <input
-              type='checkbox'
-              :checked='calendarOptions.weekends'
-              @change='handleWeekendsToggle'
-              id='checkbox-weekend'
-          />
-          Wochenenden anzeigen
-        </label>
-      </div>
-      <div class='demo-app-sidebar-section'>
-        <h2>Alle Events ({{ currentEvents.length }})</h2>
-        <ul>
-          <li v-for='event in currentEvents' :key='event.id'>
-            <b>{{ event.startStr }}</b>
-            <i>{{ event.title }}</i>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class='demo-app-main'>
-      <FullCalendar
-          class='demo-app-calendar'
-          :options='calendarOptions'
-      >
-        <template v-slot:eventContent='arg'>
-          <b>{{ arg.timeText }}</b>
-          <i>{{ arg.event.title }}</i>
-        </template>
-      </FullCalendar>
-    </div>
-  </div>
-</template>
-
 <style lang='css' scoped>
-
 h2 {
   margin: 0;
   font-size: 16px;
@@ -150,27 +158,17 @@ b { /* used for event dates/times */
 
 }
 
-.demo-app-sidebar {
-  width: 300px;
-  line-height: 1.5;
-  background: #eaf9ff;
-  border-right: 1px solid #d3e2e8;
-}
-
-.demo-app-sidebar-section {
-  padding: 2em;
-}
-
-
-
 .demo-app-main {
   flex-grow: 1;
   padding: 3em;
 }
 
-fc {
+fc{
   max-width: 1200px;
   margin: 0 auto;
 }
 
+
 </style>
+<script setup>
+</script>
