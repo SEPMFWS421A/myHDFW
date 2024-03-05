@@ -30,7 +30,9 @@
       <div class="Prüfungsverwaltung">
         <Card style="width: 30rem; overflow: hidden">
           <template #header>
+            <RouterLink to="/pruefungsverwaltung/">
              <img id="nav_card_image" class="nav_card_image" alt="user header" src="@/assets/Prüfungsverwaltung.jpg" />
+            </RouterLink>
           </template>
           <template #title><span class="nav_card_title">Prüfungsverwaltung</span></template>
           <template #subtitle>Prüfungen anlegen und löschen</template>
