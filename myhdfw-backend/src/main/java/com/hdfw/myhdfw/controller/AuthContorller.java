@@ -4,9 +4,6 @@ import com.hdfw.myhdfw.config.security.jwt.JwtService;
 import com.hdfw.myhdfw.config.security.user.UserDetailsImpl;
 import com.hdfw.myhdfw.config.security.user.UserDetailsServiceImpl;
 import com.hdfw.myhdfw.controller.dto.LoginRequest;
-import com.hdfw.myhdfw.model.Student;
-import com.hdfw.myhdfw.repository.EmployeeRepository;
-import com.hdfw.myhdfw.repository.StudentRepository;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -35,7 +32,7 @@ public class AuthContorller {
     @ApiResponse(responseCode = "200", description = "Login Successful",
             content = @Content(schema = @Schema(implementation = String.class)))
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        if(request.getUsername() == null || request.getPassword() == null) {
+        if (request.getUsername() == null || request.getPassword() == null) {
             return ResponseEntity.badRequest().build();
         }
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());

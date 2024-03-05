@@ -1,7 +1,6 @@
 package com.hdfw.myhdfw.config.security.jwt;
 
 import com.hdfw.myhdfw.config.security.user.UserDetailsServiceImpl;
-import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,7 +51,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             exceptionResolver.resolveException(request, response, null, e);
-            return;
         }
     }
 }
