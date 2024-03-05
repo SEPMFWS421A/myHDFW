@@ -8,13 +8,11 @@ test('Header is present on the page', async t => {
 });
 
 test('Header contains all elements', async t => {
-    const header_left = Selector('.header-name');
     const header_right = Selector('.header-right-menu');
     const notifications = header_right.find('.notifications');
     const profile = header_right.find('.profile');
 
-    await t.expect(header_left.exists).ok()
-            .expect(header_right.exists).ok()
+    await t.expect(header_right.exists).ok()
             .expect(notifications.exists).ok()
             .expect(profile.exists).ok();
 });
@@ -24,7 +22,25 @@ test('Profile menu is hidden', async t => {
     await t.expect(profileMenu.exists).notOk();
 });
 
-test('Profile menu is visible after click', async t => {
+test('Login panel is visible instead of profile menu when not logged in on click', async t => {
+    const profile = Selector('.header-right-menu').find('.profile');
+    const profileMenu = Selector('profile-menu');
+    const loginMenu = Selector('.p-component');
+
+    const buttonCancel = loginMenu.find('.p-button-secondary').withText('Cancel');
+    const buttonSave = loginMenu.find('.p-button').withText('Save');
+
+    await t.expect(profileMenu.exists).notOk()
+            .click(profile)
+            .expect(loginMenu.exists).ok()
+            .expect(buttonCancel.exists).ok()
+            .expect(buttonSave.exists).ok()
+            .typeText("#username","admin")
+            .typeText("#password", "password")
+            .click(buttonSave);
+});
+
+test('Profile menu is visible after click when logged in', async t => {
     const profile = Selector('.header-right-menu').find('.profile');
     const profileMenu = Selector('.profile-menu');
 
@@ -36,9 +52,9 @@ test('Profile menu is visible after click', async t => {
             .expect(profileMenu.exists).ok()
             .expect(profileEntry.exists).ok()
             .expect(logoutEntry.exists).ok();
-
 });
 
+test('Profile menu')
 test('Profile menu navigates correctly', async t => {
     const profile = Selector('.header-right-menu').find('.profile');
     const profileMenu = Selector('.profile-menu');
