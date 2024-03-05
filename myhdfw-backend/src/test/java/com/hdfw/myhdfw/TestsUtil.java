@@ -26,6 +26,9 @@ public class TestsUtil {
     @Autowired
     private StudentGroupRepository studentGroupRepository;
 
+    @Autowired
+    private LocationRepository locationRepository;
+
     public void deleteAll() {
         employeeRepository.deleteAll();
         lectureRepository.deleteAll();
@@ -33,9 +36,8 @@ public class TestsUtil {
         roomRepository.deleteAll();
         studentRepository.deleteAll();
         studentGroupRepository.deleteAll();
+        locationRepository.deleteAll();
     }
-
-
 
 
 

@@ -2,8 +2,6 @@ package com.hdfw.myhdfw;
 
 import com.hdfw.myhdfw.model.*;
 import com.hdfw.myhdfw.repository.*;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +18,10 @@ public class Demo {
     private final LectureRepository lectureRepository;
     private final LectureSeriesRepository lectureSeriesRepository;
     private final StudentGroupRepository studentGroupRepository;
+    private final LocationRepository locationRepository;
 
-    public Demo(PasswordEncoder passwordEncoder, StudentRepository studentRepository, EmployeeRepository employeeRepository, RoomRepository roomRepository, LectureRepository lectureRepository, LectureSeriesRepository lectureSeriesRepository, StudentGroupRepository studentGroupRepository) {
+    public Demo(PasswordEncoder passwordEncoder, StudentRepository studentRepository, EmployeeRepository employeeRepository, RoomRepository roomRepository, LectureRepository lectureRepository, LectureSeriesRepository lectureSeriesRepository, StudentGroupRepository studentGroupRepository,
+                LocationRepository locationRepository) {
         this.passwordEncoder = passwordEncoder;
         this.studentRepository = studentRepository;
         this.employeeRepository = employeeRepository;
@@ -29,6 +29,7 @@ public class Demo {
         this.lectureRepository = lectureRepository;
         this.lectureSeriesRepository = lectureSeriesRepository;
         this.studentGroupRepository = studentGroupRepository;
+        this.locationRepository = locationRepository;
     }
 
     //@EventListener(ApplicationStartedEvent.class)
@@ -36,7 +37,9 @@ public class Demo {
 
         Employee e = new Employee("Max", "Mustermann", "admin", passwordEncoder.encode("admin"));
         employeeRepository.save(e);
-        Room r = new Room("Room 1", 1);
+        Location loc = new Location("Location 1");
+        locationRepository.save(loc);
+        Room r = new Room("Room 1", 1, loc);
         roomRepository.save(r);
 
         LectureSeries ls = new LectureSeries("Lecture Series 1", 1, e);
