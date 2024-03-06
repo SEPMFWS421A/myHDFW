@@ -27,12 +27,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Student student = studentRepository.findByEmail(username);
+        Employee employee = employeeRepository.findByEmail(username);
         if (student != null) {
             return new UserDetailsImpl(student.getEmail(), student.getSurname(), student.getName(), student.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_STUDENT")));
         }
-        Employee employee = employeeRepository.findByEmail(username);
         if (employee != null) {
-            return new UserDetailsImpl(employee.getEmail(), employee.getSurname(), employee.getName(), employee.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_STUDENT")));
+            return new UserDetailsImpl(employee.getEmail(), employee.getSurname(), employee.getName(), employee.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_EMPLOYEE")));
         }
         throw new UsernameNotFoundException("User not found");
     }
