@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@WithMockUser(username = "admin", roles = {"ADMIN"})
+@WithMockUser(username = "student", roles = {"STUDENT"})
 public class LocationTest {
     @Autowired
     private MockMvc mockMvc;
@@ -64,9 +64,18 @@ public class LocationTest {
     }
 
     @Test
+    public void getLocationTestNotFound() throws Exception {
+        mockMvc.perform(get("/location/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void getAllLocations() throws Exception {
-        Location loc = locationRepository.save(new Location("Location 1"));
-        Location loc2 = locationRepository.save(new Location("Location 2"));
+        locationRepository.save(new Location("Location 1"));
+        locationRepository.save(new Location("Location 2"));
+
         mockMvc.perform(get("/location")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

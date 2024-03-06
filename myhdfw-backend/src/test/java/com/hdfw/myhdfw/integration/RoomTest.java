@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@WithMockUser(username = "admin", roles = {"ADMIN"})
+@WithMockUser(username = "admin", roles = {"EMPLOYEE"})
 public class RoomTest {
     @Autowired
     private MockMvc mockMvc;
@@ -99,6 +99,7 @@ public class RoomTest {
         Room room = new Room("Room 1", 1, l);
 
         mockMvc.perform(post("/room")
+                        .content(objectMapper.writeValueAsString(room))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -106,7 +107,9 @@ public class RoomTest {
                     Room roomResponse = objectMapper.readValue(result.getResponse().getContentAsString(), Room.class);
                     Assertions.assertEquals(room.getName(), roomResponse.getName());
                     Assertions.assertNotNull(roomResponse.getId());
+                    Assertions.assertTrue(roomRepository.existsById(roomResponse.getId()));
                 });
+
     }
 
     @Test
