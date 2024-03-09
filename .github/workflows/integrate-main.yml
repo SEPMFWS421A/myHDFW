@@ -34,7 +34,7 @@ jobs:
   unittest-fe:
     name: Run Vue Unit-Tests (main)
     runs-on: ubuntu-latest
-    needs: build-dev
+    needs: build-fe
     defaults:
       run:
         working-directory: myHDFW-frontend-vite
@@ -54,20 +54,33 @@ jobs:
         name: Install dependencies
       - run: npm run test:unit
         name: Run Unit-Tests
-  e2eTest-fe:
-    name: Run e2e tests (main)
+  integrationtest-fe:
+    name: Run Vue Integration tests (main)
     runs-on: ubuntu-latest
-    needs: build-main
+    needs: build-fe
     defaults:
       run:
         working-directory: myHDFW-frontend-vite
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - run: npm ci
+        name: Install dependencies
+      - name: Run dev server
+        run: npm run dev &
       - name: Run e2e-tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: "chrome ./myHDFW-frontend-vite/src/systemtest/"
+          args: "chrome:headless ./myHDFW-frontend-vite/src/integrationtest/"
+      - name: Stop dev server
+        run: kill $(lsof -t -i:5173)
+        if: always()
   build-be:
     name: Build Java Backend (main)
     runs-on: ubuntu-latest
@@ -84,9 +97,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml -DskipTests
   test-be:
-    name: Run Java Tests (main)
+    name: Run Spring Tests (main)
     runs-on: ubuntu-latest
     needs: build-be
     defaults:
@@ -101,5 +114,5 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Run Java Unit-Tests
-        run: mvn test
+      - name: Run Maven Tests
+        run: mvn test -Dspring.profiles.active=test

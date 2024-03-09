@@ -32,7 +32,7 @@ jobs:
   unittest-fe:
     name: Run Vue Unit-Tests (dev)
     runs-on: ubuntu-latest
-    needs: build-dev
+    needs: build-fe
     defaults:
       run:
         working-directory: myHDFW-frontend-vite
@@ -52,10 +52,10 @@ jobs:
         name: Install dependencies
       - run: npm run test:unit
         name: Run Unit-Tests
-  e2eTest-fe:
-    name: Run Vue e2e tests (dev)
+  integrationtest-fe:
+    name: Run Vue Integration tests (dev)
     runs-on: ubuntu-latest
-    needs: build-dev
+    needs: build-fe
     defaults:
       run:
         working-directory: myHDFW-frontend-vite
@@ -75,7 +75,7 @@ jobs:
       - name: Run e2e-tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: "chrome:headless ./myHDFW-frontend-vite/src/systemtest/"
+          args: "chrome:headless ./myHDFW-frontend-vite/src/integrationtest/"
       - name: Stop dev server
         run: kill $(lsof -t -i:5173)
         if: always()
@@ -95,9 +95,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml -DskipTests
   test-be:
-    name: Run Java Tests (dev)
+    name: Run Spring Tests (dev)
     runs-on: ubuntu-latest
     needs: build-be
     defaults:
@@ -112,5 +112,5 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Run Java Unit-Tests
-        run: mvn test
+      - name: Run Maven Tests
+        run: mvn test -Dspring.profiles.active=test
