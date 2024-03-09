@@ -11,7 +11,7 @@
           </RouterLink>
         </template>
         <template #title>
-          <span class="nav_card_title">Prüfungverwaltung</span>
+          <span class="nav_card_title">Prüfungsverwaltung</span>
           <Button id="help_button_exam" class="help_button" label="" icon="pi pi-question-circle"
                   v-tooltip="{ value: 'Confirm to proceed', showDelay: 1000, hideDelay: 300 }"/>
         </template>
@@ -24,7 +24,7 @@
   
             <template #end>
               <Button id="delete_exam" class="delete_exam" label="Prüfung löschen" icon="pi pi-trash"
-                      @click="confirmDeleteSelected" :disabled="!selectedExams || !selectedExams.length"/>
+                      @click="confirmDeleteSelected" :disabled="hideDelete()"/>
             </template>
           </Toolbar>
         </template>
@@ -217,23 +217,37 @@
   import {FilterMatchMode} from 'primevue/api';
   import {useToast} from 'primevue/usetoast';
   import {ExamService} from '@/service/ExamService';
+  import {ExamServiceHelp} from '@/service/ExamServiceHelp';
   
+  const Exams = ref();
+  const Exam = ref({                
+                id: '',
+                study_group: '',
+                lecture: '',
+                lecturer: '',
+                semester: '',
+                start_date: '',
+                end_date: '',
+                form_of_examination: '',
+                deadline_lecturer: ''});
+
   onMounted(() => {
     ExamService.getExams().then((data) => (Exams.value = data));
+    ExamServiceHelp.getExam().then(() => (Exam.value = {}));
   });
   
   const toast = useToast();
   const dt = ref();
-  const Exams = ref();
   const ExamDialog = ref(false);
   const deleteExamDialog = ref(false);
   const deleteExamsDialog = ref(false);
-  const Exam = ref({});
   const selectedExams = ref();
   const filters = ref({
     'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
   });
   const submitted = ref(false);
+
+  let isHidden;
   
   const locations = ref([
     {name: 'Mettmann'},
@@ -315,6 +329,12 @@
     selectedExams.value = null;
     toast.add({severity: 'success', summary: 'Successful', detail: 'Exams Deleted', life: 3000});
   };
+
+  const hideDelete = () => {
+    isHidden = !selectedExams || !selectedExams.length;
+    return isHidden;
+  };
+
   </script>
   
   <style scoped>

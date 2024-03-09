@@ -37,7 +37,7 @@ test('Prüfung hinzufügen', async t => {
             .typeText('#lecture_exam'               , 'Wirtschaftsstatistik')
             .typeText('#lecturer_exam'              , 'Malzkorn')
             .typeText('#semester_exam'              , '2')
-            .typeText('#start_date_exam'                , '01.01.2021')
+            .typeText('#start_date_exam'            , '01.01.2021')
             .typeText('#end_date_exam'              , '01.07.2021')
             .typeText('#form_of_examination_exam'   , 'Klausur')
             .typeText('#deadline_lecturer_exam'     , '31.12.2020')
