@@ -36,7 +36,9 @@ public class Demo {
 
         Employee e = new Employee("Max", "Mustermann", "admin", passwordEncoder.encode("admin"));
         employeeRepository.save(e);
-        Room r = new Room("Room 1", 1);
+
+        Location loc = new Location("Mettmann");
+        Room r = new Room("Room 1", 25, loc);
         roomRepository.save(r);
 
         LectureSeries ls = new LectureSeries("Lecture Series 1", 1, e);
