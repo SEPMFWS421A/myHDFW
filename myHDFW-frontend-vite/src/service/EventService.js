@@ -9,6 +9,7 @@ export const EventService = {
                 end_point: '12:30',
                 date: '17.02.2024',
                 location: 'Mettmann'
+                //room
             },
             {
                 id: '1001',

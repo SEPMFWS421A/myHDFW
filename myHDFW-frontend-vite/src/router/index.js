@@ -5,6 +5,7 @@ import home_page from "@/components/Home_page.vue";
 import Eventverwaltung from "@/components/EventManagement.vue";
 import RoomManagement from "@/components/RoomManagement.vue";
 import UserManagement from "@/components/UserManagement.vue";
+import UnittestTest from "@/components/UnittestTest.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,11 +15,11 @@ const router = createRouter({
           name: 'home',
           component: home_page
       },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: administration
-    },
+      {
+        path: '/admin',
+        name: 'admin',
+        component: administration
+      },
       {
           path: '/Schedule',
           name: 'schedule',
@@ -39,6 +40,11 @@ const router = createRouter({
           name: 'event',
           component: Eventverwaltung
       },
+      {
+        path: '/unittesttest',
+        name: 'unittest',
+        component: UnittestTest
+      }
 
   ]
 })
