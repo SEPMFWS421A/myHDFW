@@ -4,7 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hdfw.myhdfw.TestsUtil;
-import com.hdfw.myhdfw.model.Student;
+import com.hdfw.myhdfw.model.*;
+import com.hdfw.myhdfw.repository.EmployeeRepository;
+import com.hdfw.myhdfw.repository.LectureSeriesRepository;
+import com.hdfw.myhdfw.repository.StudentGroupRepository;
 import com.hdfw.myhdfw.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +24,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,14 +36,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @WithMockUser(username = "admin", roles = {"ADMIN"})
 public class StudentTest {
-    @Autowire
+    @Autowired
     private MockMvc mockMvc;
-    @Autowire
+    @Autowired
     private ObjectMapper objectMapper;
-    @Autowire
+    @Autowired
     private TestsUtil testsUtil;
-    @Autowire
+    @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private StudentGroupRepository studentGroupRepository;
+    @Autowired
+    private LectureSeriesRepository lectureSeriesRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
     @BeforeEach
     public void init(){
         objectMapper.registerModule(new JavaTimeModule());
@@ -48,7 +58,10 @@ public class StudentTest {
 
     @Test
     public void getStudentTest() throws Exception {
-        Student student = studentRepository.save(new Student("Max", "Mustermann", "max-mustermann@hdfw.de", "test1234"));
+        Employee employee = employeeRepository.save(new Employee("Employee 1","Surname 1","employee1@fhdw.de","fhdw1234"));
+        LectureSeries lectureSeries = lectureSeriesRepository.save(new LectureSeries("testSeries",1,employee));
+        StudentGroup studentGroup = studentGroupRepository.save(new StudentGroup("testGroup", Set.of(lectureSeries)));
+        Student student = studentRepository.save(new Student("Student 1", "Surname 1", "student1@hdfw.de", "test1234",studentGroup));
 
         mockMvc.perform(get("/student/" + student.getId())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -56,9 +69,9 @@ public class StudentTest {
 
                 .andExpect(status().isOk())
                 .andExpect(result -> {
-                    Room roomResponse = objectMapper.readValue(result.getResponse().getContentAsString(), Room.class);
-                    Assertions.assertEquals(room.getName(), roomResponse.getName());
-                    Assertions.assertNotNull(roomResponse.getId());
+                    Student studentResponse = objectMapper.readValue(result.getResponse().getContentAsString(), Student.class);
+                    Assertions.assertEquals(student.getName(), studentResponse.getName());
+                    Assertions.assertNotNull(studentResponse.getId());
                 });
     }
     @Test
@@ -71,8 +84,10 @@ public class StudentTest {
 
     @Test
     public void getAllStudentsTest() throws Exception {
-        Student student1 = studentRepository.save(new Student("Student 1", "Surname 1", "Student1@fhdw.de","Student1pass"));
-        Room room2 = roomRepository.save(new Student("Student 2", "Surname 2", "Student2@fhdw.de","Student2pass"));
+        Employee employee = employeeRepository.save(new Employee("Employee 1","Surname 1","employee1@fhdw.de","fhdw1234"));
+        LectureSeries lectureSeries = lectureSeriesRepository.save(new LectureSeries("testSeries",1,employee));
+        StudentGroup studentGroup = studentGroupRepository.save(new StudentGroup("testGroup", Set.of(lectureSeries)));
+        Student student = studentRepository.save(new Student("Student 1", "Surname 1", "student1@hdfw.de", "test1234",studentGroup));
 
         mockMvc.perform(get("/student")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +102,10 @@ public class StudentTest {
 
     @Test
     public void saveStudentTest() throws Exception {
-        Student student = new Student("Student 1", "Surname 1", "Student1@fhdw.de","Student1pass");
+        Employee employee = employeeRepository.save(new Employee("Employee 1","Surname 1","employee1@fhdw.de","fhdw1234"));
+        LectureSeries lectureSeries = lectureSeriesRepository.save(new LectureSeries("testSeries",1,employee));
+        StudentGroup studentGroup = studentGroupRepository.save(new StudentGroup("testGroup", Set.of(lectureSeries)));
+        Student student = studentRepository.save(new Student("Student 1", "Surname 1", "student1@hdfw.de", "test1234",studentGroup));
 
         mockMvc.perform(post("/student")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -102,7 +120,10 @@ public class StudentTest {
 
     @Test
     public void deleteStudentTest() throws Exception {
-        Student student = studentRepository.save(new Student("Student 1", "Surname 1", "Student1@fhdw.de","Student1pass"));
+        Employee employee = employeeRepository.save(new Employee("Employee 1","Surname 1","employee1@fhdw.de","fhdw1234"));
+        LectureSeries lectureSeries = lectureSeriesRepository.save(new LectureSeries("testSeries",1,employee));
+        StudentGroup studentGroup = studentGroupRepository.save(new StudentGroup("testGroup", Set.of(lectureSeries)));
+        Student student = studentRepository.save(new Student("Student 1", "Surname 1", "student1@hdfw.de", "test1234",studentGroup));
 
         mockMvc.perform(delete("/student/" + student.getId())
                         .contentType(MediaType.APPLICATION_JSON)

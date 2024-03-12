@@ -23,7 +23,7 @@ public class StudentController {
     }
 
     @GetMapping(path  = "{student_id}")
-    @ApiResponse(respomseCode = "200", description = "Found Student", content = @Content(schema = @Schema(implementation = Student.class)))
+    @ApiResponse(responseCode = "200", description = "Found Student", content = @Content(schema = @Schema(implementation = Student.class)))
     public ResponseEntity<Student> getStudent(@PathVariable("student_id") Long studentId) {
         if (studentId == null){
             return ResponseEntity.badRequest().build();
