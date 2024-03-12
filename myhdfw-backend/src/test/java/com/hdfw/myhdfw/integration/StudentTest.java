@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @WithMockUser(username = "admin", roles = {"ADMIN"})
-public class RoomTest {
+public class StudentTest {
     @Autowire
     private MockMvc mockMvc;
     @Autowire
