@@ -1,5 +1,6 @@
 package com.hdfw.myhdfw.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Location {
     String name;
 
     // -----------
+    @JsonBackReference
     @OneToMany(mappedBy = "location")
     Set<Room> rooms;
 
