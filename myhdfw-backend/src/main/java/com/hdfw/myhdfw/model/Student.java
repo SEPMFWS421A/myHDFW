@@ -3,6 +3,8 @@ package com.hdfw.myhdfw.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Builder
@@ -27,6 +29,10 @@ public class Student {
     @NonNull
     @Column(name = "password")
     String password;
+
+    @Column(name = "exmatriculation_date")
+    LocalDate exmatriculationDate;
+
     @NonNull
     @ManyToOne
     @JoinColumn(name = "student_group_id")

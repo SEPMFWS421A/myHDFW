@@ -2,7 +2,10 @@ package com.hdfw.myhdfw.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Set;
 
@@ -22,6 +25,13 @@ public class Room {
     @NonNull
     @Column(name = "capacity")
     Integer capacity;
+    @NonNull
+    @Column(name = "exam_capacity")
+    Integer examCapacity;
+    @NonNull
+    @Column(name = "equipment")
+    String equipment;
+
 
     @NonNull
     @ManyToOne

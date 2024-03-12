@@ -1,7 +1,10 @@
 package com.hdfw.myhdfw.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -22,8 +25,8 @@ public class Lecture {
     @Column(name = "date")
     LocalDateTime date;
     @NonNull
-    @Column(name = "duration")
-    Integer duration;
+    @Column(name = "duration_min")
+    Integer durationMin;
 
     @NonNull
     @ManyToOne
