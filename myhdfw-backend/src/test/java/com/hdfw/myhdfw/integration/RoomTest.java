@@ -1,5 +1,10 @@
 package com.hdfw.myhdfw.integration;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -8,6 +13,7 @@ import com.hdfw.myhdfw.model.Location;
 import com.hdfw.myhdfw.model.Room;
 import com.hdfw.myhdfw.repository.LocationRepository;
 import com.hdfw.myhdfw.repository.RoomRepository;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,11 +27,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.List;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
@@ -55,7 +56,7 @@ public class RoomTest {
     @Test
     public void getRoomTest() throws Exception {
         Location l = locationRepository.save(new Location("Location 1"));
-        Room room = roomRepository.save(new Room("Room 1", 1, l));
+      Room room = roomRepository.save(new Room("Room 1", 1, 1, "", l));
 
         mockMvc.perform(get("/room/" + room.getId())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -78,25 +79,26 @@ public class RoomTest {
 
     @Test
     public void getAllRoomsTest() throws Exception {
-        Location l = locationRepository.save(new Location("Location 1"));
-        Room room1 = roomRepository.save(new Room("Room 1", 1, l));
-        Room room2 = roomRepository.save(new Room("Room 2", 1, l));
+      Location l = locationRepository.save(new Location("Location 1"));
+      Room room1 = roomRepository.save(new Room("Room 1", 1, 1, "", l));
+      Room room2 = roomRepository.save(new Room("Room 2", 1, 1, "", l));
 
-        mockMvc.perform(get("/room")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(result -> {
-                    List<Room> roomResponse = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Room>>() {
-                    });
-                    Assertions.assertEquals(2, roomResponse.size());
+      mockMvc.perform(get("/room")
+              .contentType(MediaType.APPLICATION_JSON)
+              .accept(MediaType.APPLICATION_JSON))
+          .andExpect(status().isOk())
+          .andExpect(result -> {
+            List<Room> roomResponse =
+                objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Room>>() {
                 });
+            Assertions.assertEquals(2, roomResponse.size());
+          });
     }
 
     @Test
     public void saveRoomTest() throws Exception {
-        Location l = locationRepository.save(new Location("Location 1"));
-        Room room = new Room("Room 1", 1, l);
+      Location l = locationRepository.save(new Location("Location 1"));
+      Room room = new Room("Room 1", 1, 1, "", l);
 
         mockMvc.perform(post("/room")
                         .content(objectMapper.writeValueAsString(room))
@@ -114,8 +116,8 @@ public class RoomTest {
 
     @Test
     public void deleteRoomTest() throws Exception {
-        Location l = locationRepository.save(new Location("Location 1"));
-        Room room = roomRepository.save(new Room("Room 1", 1, l));
+      Location l = locationRepository.save(new Location("Location 1"));
+      Room room = roomRepository.save(new Room("Room 1", 1, 1, "", l));
 
         mockMvc.perform(delete("/room/" + room.getId())
                         .contentType(MediaType.APPLICATION_JSON)
