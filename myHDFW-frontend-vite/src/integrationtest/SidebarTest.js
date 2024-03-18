@@ -78,7 +78,7 @@ test('Sidebar navigates correctly for student', async t => {
 fixture('Sidebar Test - Admin')
         .page('http://localhost:5173/')
         .clientScripts({
-            content: 'window.localStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxODAwMDAwMDAwLCJzdXJuYW1lIjoiTXVzdGVybWFubiIsInJvbGVzIjpbIkFETUlOIl0sIm5hbWUiOiJNYXgifQ.g7TxzEzEikCw3vv4BikHfkwC_ymfYhpqEsDDeNGmzJM");'
+            content: 'window.localStorage.setItem("token", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxODAwMDAwMDAwLCJzdXJuYW1lIjoiTXVzdGVybWFubiIsInJvbGVzIjpbIkVNUExPWUVFIl0sIm5hbWUiOiJNYXgifQ.aPaHcT3dcYxVNlUHWN61zEHtHP7G6Hq2JpuRErqhyVw");'
         });
 
 test('Sidebar is present on the page for admin', async t => {

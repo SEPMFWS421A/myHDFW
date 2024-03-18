@@ -81,7 +81,11 @@ test('Login with wrong credentials', async t => {
 const mock = RequestMock()
         .onRequestTo('http://localhost:8080/api/v1/auth/login')
         .respond("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxODAwMDAwMDAwLCJzdXJuYW1lIjoiTXVzdGVybWFubiIsInJvbGVzIjpbIlNUVURFTlQiXSwibmFtZSI6Ik1heCJ9.MU3TCHXxPJHfpPSvNNZXP86R6PE0m6WkDj9dd5TDN5E"
-                , 200, {'access-control-allow-origin': '*'});
+            , 200, {
+                'Access-Control-Allow-Origin': 'http://localhost:5173',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            });
 fixture('Header Test with Mock')
         .page('http://localhost:5173/')
         .requestHooks(mock);

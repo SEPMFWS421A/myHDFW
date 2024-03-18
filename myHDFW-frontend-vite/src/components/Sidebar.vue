@@ -46,7 +46,7 @@ const sidebar_items_student = ref([
 
 function getSidebarItems() {
   if (store.user) {
-    if (store.user.roles.indexOf("ADMIN") > -1) {
+    if (store.user.roles.indexOf("EMPLOYEE") > -1) {
       return sidebar_items_admin.value;
     } else if (store.user.roles.indexOf("STUDENT") > -1) {
       return sidebar_items_student.value;

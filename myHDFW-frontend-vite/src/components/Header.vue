@@ -39,7 +39,6 @@ const showLogin = () => {
 };
 const login = () => {
   authApi.login({username: loginData.value.username, password: loginData.value.password}).then((response) => {
-    console.log(response.data);
     localStorage.setItem('token', response.data)
     store.token = response.data;
     store.user = VueJwtDecode.decode(response.data);
