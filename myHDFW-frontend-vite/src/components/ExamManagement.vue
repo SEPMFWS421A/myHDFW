@@ -69,78 +69,83 @@
         <!--Dialog zum anlegen-->
         <Dialog v-model:visible="ExamDialog" :style="{width: '450px'}" header="Prüfung Details" :modal="true"
                 class="p-fluid">
-                <div class="field">
+          
+          <div class="flex gap-3">
+            <div class="field">
+              <label for="lecture">Prüfung für Vorlesung</label>
+              <InputGroup>
+                <InputGroupAddon>
+                  <span class="pi pi-book icons_dialog"></span>
+                </InputGroupAddon>
+                <InputText id="lecture_exam" v-model.trim="Exam.lecture" required="true" autofocus
+                          :class="{'p-invalid': submitted && !Exam.lecture}"/>
+              </InputGroup>
+              <small class="p-error" v-if="submitted && !Exam.lecture">Vorlesung der Prüfung ist erforderlich!</small>
+            </div>
 
-            <label for="lecture">Prüfung für Vorlesung</label>
-            <InputGroup>
-              <InputGroupAddon>
-                <span class="icons_dialog">abc</span>
-              </InputGroupAddon>
-              <InputText id="lecture_exam" v-model.trim="Exam.lecture" required="true" autofocus
-                         :class="{'p-invalid': submitted && !Exam.lecture}"/>
-            </InputGroup>
-            <small class="p-error" v-if="submitted && !Exam.lecture">Vorlesung der Prüfung ist erforderlich!</small>
+            <div class="field">
+              <label for="lecturer">Dozent</label>
+              <InputGroup>
+                <InputGroupAddon>
+                  <span class="pi pi-user icons_dialog"></span>
+                </InputGroupAddon>
+                <InputText id="lecturer_exam" v-model.trim="Exam.lecturer" required="true" autofocus
+                          :class="{'p-invalid': submitted && !Exam.lecturer}"/>
+              </InputGroup>
+              <small class="p-error" v-if="submitted && !Exam.lecturer">Dozent ist erforderlich!</small>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="study_group">Studentengruppe</label>
-            <InputGroup>
-              <InputGroupAddon>
-                <span class="icons_dialog">abc</span>
-              </InputGroupAddon>
-              <InputText id="study_group_exam" v-model.trim="Exam.study_group" required="true" autofocus
-                         :class="{'p-invalid': submitted && !Exam.study_group}"/>
-            </InputGroup>
-            <small class="p-error" v-if="submitted && !Exam.study_group">Studentengruppe ist erforderlich!</small>
-          </div>
-    
-
-          <div class="field">
-            <label for="lecturer">Dozent</label>
-            <InputGroup>
-              <InputGroupAddon>
-                <span class="icons_dialog">abc</span>
-              </InputGroupAddon>
-              <InputText id="lecturer_exam" v-model.trim="Exam.lecturer" required="true" autofocus
-                         :class="{'p-invalid': submitted && !Exam.lecturer}"/>
-            </InputGroup>
-            <small class="p-error" v-if="submitted && !Exam.lecturer">Dozent ist erforderlich!</small>
-          </div>
-
-          <div class="field">
-            <label for="semester">Semester</label>
-            <InputGroup>
-              <InputGroupAddon>
-                <span class="icons_dialog">abc</span>
-              </InputGroupAddon>
-              <InputText id="semester_exam" v-model.trim="Exam.semester" required="true" autofocus
-                         :class="{'p-invalid': submitted && !Exam.semester}"/>
-            </InputGroup>
-            <small class="p-error" v-if="submitted && !Exam.semester">Semester ist erforderlich!</small>
+          <div class="flex gap-3">
+            <div class="field">
+              <label for="study_group">Studentengruppe</label>
+              <InputGroup>
+                <InputGroupAddon>
+                  <span class="material-icons">group</span>
+                </InputGroupAddon>
+                <InputText id="study_group_exam" v-model.trim="Exam.study_group" required="true" autofocus
+                          :class="{'p-invalid': submitted && !Exam.study_group}"/>
+              </InputGroup>
+              <small class="p-error" v-if="submitted && !Exam.study_group">Studentengruppe ist erforderlich!</small>
+            </div>
+      
+            <div class="field">
+              <label for="semester">Semester</label>
+              <InputGroup>
+                <InputGroupAddon>
+                  <span class="icons_dialog">123</span>
+                </InputGroupAddon>
+                <InputText id="semester_exam" v-model.trim="Exam.semester" required="true" autofocus
+                          :class="{'p-invalid': submitted && !Exam.semester}"/>
+              </InputGroup>
+              <small class="p-error" v-if="submitted && !Exam.semester">Semester ist erforderlich!</small>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="start_date">Startdatum</label>
-            <InputGroup>
-              <InputGroupAddon>
-                <span class="icons_dialog">abc</span>
-              </InputGroupAddon>
-              <InputText id="start_date_exam" v-model.trim="Exam.start_date" required="true" autofocus
-                         :class="{'p-invalid': submitted && !Exam.start_date}"/>
-            </InputGroup>
-            <small class="p-error" v-if="submitted && !Exam.start_date">Startdatum ist erforderlich!</small>
-          </div>
+          <div class="flex gap-3">
+            <div class="field">
+              <label for="start_date">Startdatum</label>
+              <InputGroup>
+                <InputGroupAddon>
+                      <span class="material-icons">start</span>
+                </InputGroupAddon>
+                <InputText id="start_date_exam" v-model.trim="Exam.start_date" required="true" autofocus
+                          :class="{'p-invalid': submitted && !Exam.start_date}"/>
+              </InputGroup>
+              <small class="p-error" v-if="submitted && !Exam.start_date">Startdatum ist erforderlich!</small>
+            </div>
 
-          <div class="field">
-            <label for="end_date">Enddatum</label>
-            <InputGroup>
-              <InputGroupAddon>
-                <span class="icons_dialog">abc</span>
-              </InputGroupAddon>
-              <InputText id="end_date_exam" v-model.trim="Exam.end_date" required="true" autofocus
-                         :class="{'p-invalid': submitted && !Exam.end_date}"/>
-            </InputGroup>
-            <small class="p-error" v-if="submitted && !Exam.end_date">Enddatum ist erforderlich!</small>
+            <div class="field">
+              <label for="end_date">Enddatum</label>
+              <InputGroup>
+                <InputGroupAddon>
+                  <span class="material-icons">sports_score</span>
+                </InputGroupAddon>
+                <InputText id="end_date_exam" v-model.trim="Exam.end_date" required="true" autofocus
+                          :class="{'p-invalid': submitted && !Exam.end_date}"/>
+              </InputGroup>
+              <small class="p-error" v-if="submitted && !Exam.end_date">Enddatum ist erforderlich!</small>
+            </div>
           </div>
 
           <div class="field">

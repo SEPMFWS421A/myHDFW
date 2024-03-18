@@ -2,8 +2,29 @@ export const ExamService = {
     getExamsData() {
         return [
             {
+            /*  public class LectureCreationRequest {
+                private String name;
+                private Long studentGroupId;
+                private Long lecturerId;
+                private int semester;
+                private DayOfWeek lectureWeekday;
+                private LocalTime lectureTime;
+                private int lectureDurationMin;
+                private Long lectureRoomId;
+                private LocalDateTime examDate;
+                private int examDurationMin;
+                private Long examRoomId;
+                private ExamType examType;
+                }
+                public class LectureUpdateRequest {
+                    private Long id;
+                    private String name;
+                    private LocalDateTime date;
+                    private Integer durationMin;
+                    private Long roomId;
+                }*/ 
                 id: '5000',
-                study_group: 'MFWS421A',
+                study_group: 'MFWS421A',           
                 lecture: 'Web Technologies and Applications',
                 lecturer: 'Temiz',
                 semester: '5',
@@ -69,6 +90,9 @@ export const ExamService = {
             },
         ];
     },
+
+
+    
 
     getExams() {
         return Promise.resolve(this.getExamsData());

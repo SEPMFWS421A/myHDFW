@@ -89,16 +89,16 @@
           </div>
 
 
-        <div class="field">
-          <label for="end_point">Endpunkt</label>
-          <InputGroup>
-            <InputGroupAddon>
-              <i class="pi pi-pencil icons_dialog"></i>
-            </InputGroupAddon>
-            <InputText id="end_point" v-model.trim="Event.end_point" required="true" autofocus :class="{'p-invalid': submitted && !Event.end_point}" />
-          </InputGroup>
-          <small class="p-error" v-if="submitted && !Event.end_point">Ein Endpunkt ist erforderlich!</small>
-        </div>
+          <div class="field">
+            <label for="end_point">Endpunkt</label>
+            <InputGroup>
+              <InputGroupAddon>
+                <i class="pi pi-pencil icons_dialog"></i>
+              </InputGroupAddon>
+              <InputText id="end_point" v-model.trim="Event.end_point" required="true" autofocus :class="{'p-invalid': submitted && !Event.end_point}" />
+            </InputGroup>
+            <small class="p-error" v-if="submitted && !Event.end_point">Ein Endpunkt ist erforderlich!</small>
+          </div>
         </div>
 
 
