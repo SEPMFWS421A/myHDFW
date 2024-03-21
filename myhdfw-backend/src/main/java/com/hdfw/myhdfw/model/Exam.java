@@ -38,9 +38,4 @@ public class Exam {
     @OneToOne(mappedBy = "exam")
     LectureSeries lectureSeries;
 
-    @PreRemove
-    private void preRemove() {
-        if (lectureSeries != null) lectureSeries.setExam(null);
-    }
-
 }
