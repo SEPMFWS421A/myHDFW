@@ -1,12 +1,19 @@
 package com.hdfw.myhdfw.controller.dto;
 
-import com.hdfw.myhdfw.model.Employee;
+import com.hdfw.myhdfw.model.ExamType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class LectureCreationRequest {
   private String name;
   private Long studentGroupId;
-  private Employee lecturer;
+    private Long lecturerId;
   private int semester;
   private LocalDateTime lectureStart;
   private int lectureDurationMin;
@@ -14,5 +21,5 @@ public class LectureCreationRequest {
   private LocalDateTime examDate;
   private int examDurationMin;
   private Long examRoomId;
-  private Long examType;
+    private ExamType examType;
 }

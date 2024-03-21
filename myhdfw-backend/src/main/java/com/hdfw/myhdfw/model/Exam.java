@@ -2,15 +2,13 @@ package com.hdfw.myhdfw.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "exam")
@@ -39,5 +37,10 @@ public class Exam {
     @JsonIgnore
     @OneToOne(mappedBy = "exam")
     LectureSeries lectureSeries;
+
+    @PreRemove
+    private void preRemove() {
+        if (lectureSeries != null) lectureSeries.setExam(null);
+    }
 
 }
