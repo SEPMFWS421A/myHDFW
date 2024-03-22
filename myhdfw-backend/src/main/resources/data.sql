@@ -26,7 +26,7 @@ VALUES (1, 'email@email.de', '$2a$10$iR7ikFkFs0kQ9sO1ph4GFuG2HfprKpUMfqtFZEXf5hG
 INSERT INTO myHDFW.employee (id, email, password, name, surname)
 VALUES (1, 'admin', '$2a$12$63YTWDYKxRBgcOQri8mjseMaOf9ZefbOvisfoSwL4p.lMYyGoCiEO', 'Maximilian',
         'Mustermann'),
-       (2, 'admin2@email.de', '$2a$12$vzACEDJRve0Ffp5x0paEpOnq6HdPbSTJM1dvC80Mqxv5kiMViHn8a', 'Professor2',
+       (2, 'admin@hdfw.test.de', '$2a$12$8TF6mtf8CW6V4Mwi8GMaX.7PrcDAIhLnjJB5A1anBD6u3Pmtohz0y', 'Professor',
         'Mustermann');
 
 INSERT INTO myHDFW.exam (id, duration_min, exam_type, date, room_id)
