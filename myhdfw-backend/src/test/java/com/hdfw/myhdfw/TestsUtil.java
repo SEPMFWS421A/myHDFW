@@ -27,12 +27,12 @@ public class TestsUtil {
     private StudentGroupRepository studentGroupRepository;
 
     public void deleteAll() {
-        employeeRepository.deleteAll();
         lectureRepository.deleteAll();
-        lectureSeriesRepository.deleteAll();
-        roomRepository.deleteAll();
         studentRepository.deleteAll();
         studentGroupRepository.deleteAll();
+        roomRepository.deleteAll();
+        lectureSeriesRepository.deleteAll();
+        employeeRepository.deleteAll();
     }
 
 
