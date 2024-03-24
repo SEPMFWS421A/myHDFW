@@ -8,8 +8,13 @@
         "build": "vite build",
         "preview": "vite preview",
         "test:unit": "vitest",
-        "test:e2e:chromium": "testcafe chromium ./src/systemtest/",
-        "test:e2e:chrome": "testcafe chrome ./src/systemtest/"
+        "test:e2e:integration:chromium": "testcafe chromium ./src/integrationtest/",
+        "test:e2e:integration:chrome": "testcafe chrome ./src/integrationtest/",
+        "test:e2e:system:chromium": "testcafe chromium ./src/systemtest/",
+        "test:e2e:system:chrome": "testcafe chrome ./src/systemtest/",
+        "pregenerate-api:linux": "if [ -d src/api/service ]; then rm -rf src/api/service; fi",
+        "pregenerate-api:windows": "if exist src\\api\\service rmdir /s /q src\\api\\service",
+        "generate-api": "openapi-generator-cli generate -g typescript-axios -i ./src/api/api-docs.yaml -o src/api/service --skip-validate-spec"
     },
     "dependencies": {
         "@fullcalendar/core": "^6.1.10",
@@ -18,16 +23,19 @@
         "@fullcalendar/list": "^6.1.10",
         "@fullcalendar/timegrid": "^6.1.10",
         "@fullcalendar/vue3": "^6.1.10",
+        "axios": "^1.6.7",
         "bootstrap-vue": "^2.23.1",
         "event-utils": "^2.1.0",
         "primeflex": "^3.0.1",
         "primeicons": "^6.0.1",
         "primevue": "^3.46.0",
         "vue": "^3.3.11",
+        "vue-jwt-decode": "^0.1.0",
         "vue-router": "^4.2.5"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.23.3",
+        "@openapitools/openapi-generator-cli": "^2.11.0",
         "@vitejs/plugin-vue": "^4.5.2",
         "@vue/test-utils": "^2.4.3",
         "jsdom": "^23.0.1",
