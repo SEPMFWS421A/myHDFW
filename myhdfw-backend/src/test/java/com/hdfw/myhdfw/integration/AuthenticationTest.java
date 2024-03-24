@@ -127,14 +127,4 @@ public class AuthenticationTest {
                         .content(TestsUtil.asJsonString(null)))
                 .andExpect(status().is4xxClientError());
     }
-
-    @Test
-    public void successfulLogoutAfterSuccessfulLogin() {
-        // TODO
-    }
-
-    @Test
-    public void unsuccessfulLogoutWithoutSuccessfulLogin() {
-        // TODO
-    }
 }

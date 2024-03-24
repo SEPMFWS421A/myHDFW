@@ -1,7 +1,7 @@
 package com.hdfw.myhdfw.repository.decorator;
 
 import com.hdfw.myhdfw.controller.dto.LectureCreationRequest;
-import com.hdfw.myhdfw.model.LectureSeries;
+import com.hdfw.myhdfw.model.*;
 import com.hdfw.myhdfw.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -40,7 +40,53 @@ public class LectureSeriesService {
 
     @Transactional
     public LectureSeries createLectureSeries(LectureCreationRequest request) {
-        return null;
+        if (request == null ||
+                request.getName() == null || request.getName().isEmpty() ||
+                request.getLecturerId() == null || request.getExamRoomId() == null || request.getLectureRoomId() == null || request.getStudentGroupId() == null ||
+                request.getLectureStart() == null || request.getExamDate() == null ||
+                request.getSemester() == 0 || request.getExamDurationMin() == 0 || request.getLectureDurationMin() == 0 ||
+                request.getExamType() == null) return null;
+        StudentGroup s = studentGroupRepository.findById(request.getStudentGroupId()).orElse(null);
+        if (s == null) return null;
+        Employee e = employeeRepository.findById(request.getLecturerId()).orElse(null);
+        if (e == null) return null;
+        Room examRoom = roomRepository.findById(request.getExamRoomId()).orElse(null);
+        if (examRoom == null) return null;
+        Room lectureRoom = roomRepository.findById(request.getLectureRoomId()).orElse(null);
+        if (lectureRoom == null) return null;
+
+        Exam exam = new Exam();
+        exam.setDate(request.getExamDate());
+        exam.setDurationMin(request.getExamDurationMin());
+        exam.setRoom(examRoom);
+        exam.setExamType(request.getExamType());
+        examRepository.save(exam);
+
+        LectureSeries lectureSeries = new LectureSeries();
+        lectureSeries.setName(request.getName());
+        lectureSeries.setSemester(request.getSemester());
+        lectureSeries.setEmployee(e);
+        lectureSeries.setExam(exam);
+        lectureSeriesRepository.save(lectureSeries);
+
+        for (int i = 0; i < 10; i++) {
+            Lecture lecture = new Lecture();
+            lecture.setName(request.getName() + " (" + (i + 1) + ". Vorlesung)");
+            lecture.setLectureSeries(lectureSeries);
+            lecture.setRoom(lectureRoom);
+            lecture.setDate(request.getLectureStart().plusWeeks(i));
+            lecture.setDurationMin(request.getLectureDurationMin());
+            lectureRepository.save(lecture);
+        }
+
+        for (Student student : s.getStudents()) {
+            Enrollment enrollment = new Enrollment();
+            enrollment.setStudent(student);
+            enrollment.setLectureSeries(lectureSeries);
+            enrollment.setStatus(EnrollmentStatus.ENROLLED);
+            enrollmentRepository.save(enrollment);
+        }
+        return lectureSeries;
     }
 
     @Transactional
