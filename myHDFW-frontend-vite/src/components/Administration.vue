@@ -1,5 +1,6 @@
 <template>
-  <div class="card-container">
+  <div v-if="isVisible" class="card-container">
+    <p>{{ msg }}</p>
     <div class="row">
       <div class="Raumverwaltung">
         <Card style="width: 30rem; overflow: hidden">
@@ -57,7 +58,10 @@
 
 <script>
 export default {
-
+    props: {
+      isVisible: true,
+      msg: String,
+    }
 };
 </script>
 
