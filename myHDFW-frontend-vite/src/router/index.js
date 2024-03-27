@@ -5,6 +5,7 @@ import home_page from "@/components/Home_page.vue";
 import Eventverwaltung from "@/components/EventManagement.vue";
 import RoomManagement from "@/components/RoomManagement.vue";
 import UserManagement from "@/components/UserManagement.vue";
+import GradeOverview from "@/components/GradeOverview.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,12 @@ const router = createRouter({
           name: 'event',
           component: Eventverwaltung
       },
+      {
+          path:'/notenverwaltung/',
+          name: 'Notenverwaltung',
+          component: GradeOverview
+      },
+
 
   ]
 })

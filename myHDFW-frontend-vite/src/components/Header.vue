@@ -85,7 +85,7 @@ const hideDialog = () => {
 .header-container {
   display: flex;
   width: 100%;
-  justify-content: flex-end
+  justify-content: flex-end;
 }
 
 .header-right-menu {

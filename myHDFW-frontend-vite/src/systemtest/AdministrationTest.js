@@ -19,3 +19,4 @@ test('The card navigates to the right page', async t => {
             .click(link)
             .expect(getLocation()).contains('/Eventverwaltung/')
 });
+
