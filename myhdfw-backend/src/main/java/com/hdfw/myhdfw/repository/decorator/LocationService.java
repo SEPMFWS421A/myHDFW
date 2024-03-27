@@ -27,14 +27,4 @@ public class LocationService {
         if (location == null) return null;
         return locationRepository.save(location);
     }
-
-    public boolean deleteLocation(Long id) {
-        if (id == null) return false;
-        Location location = locationRepository.findById(id).orElse(null);
-        if (location != null) {
-            locationRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
 }

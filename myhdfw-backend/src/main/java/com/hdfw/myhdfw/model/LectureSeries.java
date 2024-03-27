@@ -2,7 +2,10 @@ package com.hdfw.myhdfw.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Set;
 
@@ -26,14 +29,18 @@ public class LectureSeries {
     @ManyToOne
     @JoinColumn(name = "employee_id")
     Employee employee;
+    @NonNull
+    @OneToOne
+    @JoinColumn(name = "exam_id")
+    Exam exam;
 
 
     // -----------
     @JsonIgnore
-    @ManyToMany(mappedBy = "lectureSeries")
-    Set<StudentGroup> studentGroups;
-    @JsonIgnore
     @OneToMany(mappedBy = "lectureSeries")
     Set<Lecture> lectures;
+    @JsonIgnore
+    @OneToMany(mappedBy = "lectureSeries")
+    Set<Enrollment> enrollments;
 
 }
