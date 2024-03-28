@@ -47,7 +47,7 @@
               </div>
             </template>
             <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
-                <Column field="lecture"     	                header="Prüfung" sortable style="min-width:12rem"></Column>    
+                <Column field="name"     	                header="Prüfung" sortable style="min-width:12rem"></Column>    
                 <Column field="study_group"                     header="Studentengruppe" sortable style="min-width:12rem"></Column>
                 <Column field="lecturer"                        header="Dozent" sortable style="min-width:12rem"></Column>
                 <Column field="semester"                        header="Semester" sortable style="min-width:12rem"></Column>
@@ -72,39 +72,42 @@
           
           <div class="flex gap-3">
             <div class="field">
-              <label for="lecture">Prüfung für Vorlesung</label>
+              <label for="name">Vorleseung</label>
               <InputGroup>
                 <InputGroupAddon>
                   <span class="pi pi-book icons_dialog"></span>
                 </InputGroupAddon>
-                <InputText id="lecture_exam" v-model.trim="Exam.lecture" required="true" autofocus
+                <InputText id="lecture_exam" v-model.trim="Exam.name" required="true" autofocus
                           :class="{'p-invalid': submitted && !Exam.lecture}"/>
               </InputGroup>
-              <small class="p-error" v-if="submitted && !Exam.lecture">Vorlesung der Prüfung ist erforderlich!</small>
+              <small class="p-error" v-if="submitted && !Exam.name">Vorlesung der Prüfung ist erforderlich!</small>
             </div>
 
             <div class="field">
-              <label for="lecturer">Dozent</label>
+              <label for="lecturerId">Dozent</label>
               <InputGroup>
                 <InputGroupAddon>
                   <span class="pi pi-user icons_dialog"></span>
                 </InputGroupAddon>
+                <Dropdown id="lecturer_exam" v-model="Exam.lecturerId" :options="lecturerOpt" option-label="label" placeholder="Wähle einen Dozent aus"> 
+                </Dropdown>        
+                <!--
                 <InputText id="lecturer_exam" v-model.trim="Exam.lecturer" required="true" autofocus
-                          :class="{'p-invalid': submitted && !Exam.lecturer}"/>
+                          :class="{'p-invalid': submitted && !Exam.lecturer}"/>-->
               </InputGroup>
-              <small class="p-error" v-if="submitted && !Exam.lecturer">Dozent ist erforderlich!</small>
+              <small class="p-error" v-if="submitted && !Exam.lecturerId">Dozent ist erforderlich!</small>
             </div>
           </div>
 
           <div class="flex gap-3">
             <div class="field">
-              <label for="study_group">Studentengruppe</label>
+              <label for="studentGroupId">Studentengruppe</label>
               <InputGroup>
                 <InputGroupAddon>
                   <span class="material-icons">group</span>
                 </InputGroupAddon>
-                <InputText id="study_group_exam" v-model.trim="Exam.study_group" required="true" autofocus
-                          :class="{'p-invalid': submitted && !Exam.study_group}"/>
+                <InputText id="study_group_exam" v-model.trim="Exam.studentGroupId" required="true" autofocus
+                          :class="{'p-invalid': submitted && !Exam.studentGroupId}"/>
               </InputGroup>
               <small class="p-error" v-if="submitted && !Exam.study_group">Studentengruppe ist erforderlich!</small>
             </div>
@@ -149,13 +152,13 @@
           </div>
 
           <div class="field">
-            <label for="form_of_examination">Prüfungsart</label>
+            <label for="examType">Prüfungsart</label>
             <InputGroup>
               <InputGroupAddon>
                 <span class="icons_dialog">abc</span>
               </InputGroupAddon>
-              <InputText id="form_of_examination_exam" v-model.trim="Exam.form_of_examination" required="true" autofocus
-                         :class="{'p-invalid': submitted && !Exam.form_of_examination}"/>
+              <InputText id="form_of_examination_exam" v-model.trim="Exam.examType" required="true" autofocus
+                         :class="{'p-invalid': submitted && !Exam.examType}"/>
             </InputGroup>
             <small class="p-error" v-if="submitted && !Exam.form_of_examination">Prüfungsart ist erforderlich!</small>
           </div>
@@ -172,11 +175,28 @@
             <small class="p-error" v-if="submitted && !Exam.deadline_lecturer">Beabrbeitungsfrist ist erforderlich!</small>
           </div>
 
-
-
-
-
-
+          <!-- 
+          <div class="field">
+            <label for="lectureWeekday">Beabrbeitungsfrist</label>
+            <InputGroup>
+              <InputGroupAddon>
+                <span class="icons_dialog">abc</span>
+              </InputGroupAddon>
+              <InputText id="lectureWeekday" v-model.trim="Exam.lectureWeekday" required="true" autofocus
+                         :class="{'p-invalid': submitted && !Exam.deadline_lecturer}"/>
+            </InputGroup>
+          </div>
+          <div class="field">
+            <label for="lectureTime">Beabrbeitungsfrist</label>
+            <InputGroup>
+              <InputGroupAddon>
+                <span class="icons_dialog">abc</span>
+              </InputGroupAddon>
+              <InputText id="lectureTime" v-model.trim="Exam.lectureTime" required="true" autofocus
+                         :class="{'p-invalid': submitted && !Exam.deadline_lecturer}"/>
+            </InputGroup>
+          </div>
+          -->
 
           <template #footer>
             <Button id="add_exam_cancel" class="cancel_dialog" label="Abbrechen" icon="pi pi-times" text
@@ -222,23 +242,47 @@
   import {FilterMatchMode} from 'primevue/api';
   import {useToast} from 'primevue/usetoast';
   import {ExamService} from '@/service/ExamService';
-  import {ExamServiceHelp} from '@/service/ExamServiceHelp';
+  //import {ExamServiceHelp} from '@/service/ExamServiceHelp';
+  import {LectureControllerApi} from "@/api/service/index.ts";
   
+
+  const lectureService = new LectureControllerApi();
+
   const Exams = ref();
   const Exam = ref({                
+                id: String,
+                name: String,
+                studentGroupId: Number,
+                lecturerId: Number,
+                semester: Number,
+                lectureWeekday: Date,
+                lectureDurationMin: Number,
+                lectureRoomId: Number,
+                examDate: Date,
+                examDurationMin: Number,
+                examRoomId: Number,
+                examType: Object,
+                lecturer: String});
+  /*const Exam = ref({                
                 id: '',
                 study_group: '',
-                lecture: '',
-                lecturer: '',
+                name: '',
+                lecturerId: '',
                 semester: '',
                 start_date: '',
                 end_date: '',
                 form_of_examination: '',
-                deadline_lecturer: ''});
+                deadline_lecturer: ''});*/
+  //const Exam = ref();
+  //const Exam = ref();
 
+  //const Exam = ref(); 
   onMounted(() => {
     ExamService.getExams().then((data) => (Exams.value = data));
-    ExamServiceHelp.getExam().then(() => (Exam.value = {}));
+    //ExamServiceHelp.getExam().then(() => (Exam.value = {}));
+    //lectureService.getAllLectures.then((data) => (Exams.value = data));
+    //ExamServiceHelp.getLectures.then((data) => (Exams.value = data));
+
   });
   
   const toast = useToast();
@@ -254,12 +298,14 @@
 
   let isHidden;
   
-  const locations = ref([
-    {name: 'Mettmann'},
-    {name: 'Paderborn'},
-    {name: 'Bergisch-Gladbach'}
+  const lecturerOpt = ref([
+    {label: 'Stroeder', value: 1},
+    {label: 'Temiz', value: 2},
   ]);
-  
+
+
+//const createExam
+
   const openNew = () => {
     Exam.value = {};
     submitted.value = false;
@@ -272,15 +318,15 @@
   const saveExam = () => {
     submitted.value = true;
   
-    if (Exam.value.lecture.trim()) {
+    if (Exam.value.name.trim()) {
       if (Exam.value.id) {
         Exams.value[findIndexById(Exam.value.id)] = Exam.value;
         toast.add({severity: 'success', summary: 'Successful', detail: 'Exam Updated', life: 3000});
       } else {
         Exam.value.id = createId();
-        Exam.value.code = createId();
-        Exam.value.image = 'Exam-placeholder.svg';
-        Exam.value.inventoryStatus = Exam.value.inventoryStatus ? Exam.value.inventoryStatus.value : 'INSTOCK';
+        Exam.value.lecturer = 'Test';
+        //lecturerOpt.find(val => val.value === Exam.value.lecturerId);
+        
         Exams.value.push(Exam.value);
         toast.add({severity: 'success', summary: 'Successful', detail: 'Exam Created', life: 3000});
       }
