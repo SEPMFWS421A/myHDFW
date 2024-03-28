@@ -2,6 +2,26 @@
 import {RouterView} from 'vue-router'
 import Sidebar from './components/Sidebar.vue'
 import Header from './components/Header.vue'
+import {store} from "@/service/store.js";
+import VueJwtDecode from "vue-jwt-decode";
+
+async function checkToken(token) {
+  if (token !== undefined && token !== null && token !== "") {
+    let user = VueJwtDecode.decode(token);
+    const expiryDate = new Date(user.exp * 1000);
+    if (expiryDate < new Date()) {
+      store.token = null;
+      store.user = null;
+    } else {
+      store.token = token;
+      store.user = user;
+    }
+  }
+}
+
+checkToken(localStorage.getItem('token'));
+setInterval(() => checkToken(store.token), 5000);
+
 </script>
 
 <template>
