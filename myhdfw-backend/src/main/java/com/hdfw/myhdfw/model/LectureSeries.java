@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "lecture_series")
@@ -26,14 +27,18 @@ public class LectureSeries {
     @ManyToOne
     @JoinColumn(name = "employee_id")
     Employee employee;
+    @NonNull
+    @OneToOne
+    @JoinColumn(name = "exam_id")
+    Exam exam;
 
 
     // -----------
     @JsonIgnore
-    @ManyToMany(mappedBy = "lectureSeries")
-    Set<StudentGroup> studentGroups;
-    @JsonIgnore
     @OneToMany(mappedBy = "lectureSeries")
     Set<Lecture> lectures;
+    @JsonIgnore
+    @OneToMany(mappedBy = "lectureSeries")
+    Set<Enrollment> enrollments;
 
 }

@@ -1,10 +1,18 @@
 package com.hdfw.myhdfw.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.Set;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Getter
@@ -19,17 +27,9 @@ public class StudentGroup {
     @NonNull
     @Column(name = "name")
     String name;
-    @NonNull
-    @ManyToMany
-    @JoinTable(
-            name = "student_group_lecture_series",
-            joinColumns = @JoinColumn(name = "student_group_id"),
-            inverseJoinColumns = @JoinColumn(name = "lecture_series_id")
-    )
-    Set<LectureSeries> lectureSeries;
 
 
-    // -----------
+  // -----------
     @JsonIgnore
     @OneToMany(mappedBy = "studentGroup")
     Set<Student> students;

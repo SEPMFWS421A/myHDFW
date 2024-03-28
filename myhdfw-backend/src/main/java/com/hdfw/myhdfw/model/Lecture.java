@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Table(name = "lecture")
@@ -22,8 +23,8 @@ public class Lecture {
     @Column(name = "date")
     LocalDateTime date;
     @NonNull
-    @Column(name = "duration")
-    Integer duration;
+    @Column(name = "duration_min")
+    Integer durationMin;
 
     @NonNull
     @ManyToOne

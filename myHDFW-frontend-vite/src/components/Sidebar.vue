@@ -6,7 +6,7 @@
       </div>
     </router-link>
     <div class="sidebar-menu">
-      <Menu :model="sidebar_items">
+      <Menu :model="getSidebarItems()">
         <template #item="{ item, props }">
           <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
             <a v-ripple :href="href" v-bind="props.action" @click="navigate">
@@ -29,12 +29,35 @@
 <script setup>
 import Menu from 'primevue/menu';
 import {ref} from "vue";
+import {store} from '../service/store.js'
 
-const sidebar_items = ref([
+const sidebar_items_default = ref([
+  {label: 'Startseite', icon: 'home', route: '/'},
+]);
+const sidebar_items_admin = ref([
   {label: 'Startseite', icon: 'home', route: '/'},
   {label: 'Administration', icon: 'work', route: '/admin'},
-  {label: 'Kalendar', icon: 'calendar_month', route: '/schedule'},
+  {label: 'Kalender', icon: 'calendar_month', route: '/schedule'},
 ]);
+const sidebar_items_student = ref([
+  {label: 'Startseite', icon: 'home', route: '/'},
+  {label: 'Kalender', icon: 'calendar_month', route: '/schedule'},
+]);
+
+function getSidebarItems() {
+  if (store.user) {
+    if (store.user.roles.indexOf("EMPLOYEE") > -1) {
+      return sidebar_items_admin.value;
+    } else if (store.user.roles.indexOf("STUDENT") > -1) {
+      return sidebar_items_student.value;
+    } else {
+      return sidebar_items_default.value;
+    }
+  } else {
+    return sidebar_items_default.value;
+  }
+}
+
 
 </script>
 

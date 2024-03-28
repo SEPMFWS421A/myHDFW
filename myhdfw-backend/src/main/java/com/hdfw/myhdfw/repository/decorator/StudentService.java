@@ -1,25 +1,31 @@
 package com.hdfw.myhdfw.repository.decorator;
 
 import com.hdfw.myhdfw.controller.dto.StudentCreationRequest;
+import com.hdfw.myhdfw.model.Enrollment;
 import com.hdfw.myhdfw.model.Student;
 import com.hdfw.myhdfw.model.StudentGroup;
+import com.hdfw.myhdfw.repository.EnrollmentRepository;
 import com.hdfw.myhdfw.repository.StudentGroupRepository;
 import com.hdfw.myhdfw.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
     private final StudentGroupRepository studentGroupRepository;
+    private final EnrollmentRepository enrollmentRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public StudentService(StudentRepository studentRepository, StudentGroupRepository studentGroupRepository,
+    public StudentService(StudentRepository studentRepository, StudentGroupRepository studentGroupRepository, EnrollmentRepository enrollmentRepository,
                           PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
         this.studentGroupRepository = studentGroupRepository;
+        this.enrollmentRepository = enrollmentRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -40,9 +46,16 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    @Transactional
     public boolean deleteStudent(Long id) {
         if (id == null) return false;
-        studentRepository.deleteById(id);
-        return true;
+        Student student = studentRepository.findById(id).orElse(null);
+        if (student != null) {
+            Set<Enrollment> enrollments = student.getEnrollments();
+            if (!enrollments.isEmpty()) enrollmentRepository.deleteAll(enrollments);
+            studentRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
