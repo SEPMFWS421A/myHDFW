@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  frontend:
+    image: myhdfw-frontend:latest
+    build: ./myHDFW-frontend-vite
+    container_name: myhdfw-frontend
+    ports:
+      - "80:8080"
