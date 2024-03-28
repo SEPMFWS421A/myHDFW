@@ -1,8 +1,51 @@
 version: "3.8"
 services:
-  frontend:
+  myhdfw-frontend:
     image: myhdfw-frontend:latest
+    restart: on-failure
     build: ./myHDFW-frontend-vite
     container_name: myhdfw-frontend
     ports:
       - "80:8080"
+    depends_on:
+      - myhdfw-backend
+
+  myhdfw-backend:
+    image: myhdfw-backend:latest
+    build: ./myhdfw-backend
+    restart: on-failure
+    container_name: myhdfw-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - myhdfw-network
+    depends_on:
+      - myhdfw-db
+
+  myhdfw-db:
+    image: mariadb:latest
+    restart: on-failure
+    container_name: myhdfw-db
+    environment:
+      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_USER=${DATABASE_USER}
+      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - myHDFW-db:/var/lib/mysql
+    networks:
+      - myhdfw-network
+
+volumes:
+  myHDFW-db:
+
+networks:
+  myhdfw-network:
+    driver: bridge
