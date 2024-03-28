@@ -30,6 +30,7 @@ public class Student {
     String email;
     @NonNull
     @Column(name = "password")
+    @JsonIgnore
     String password;
     @Column(name = "exmatriculation_date")
     LocalDate exmatriculationDate;

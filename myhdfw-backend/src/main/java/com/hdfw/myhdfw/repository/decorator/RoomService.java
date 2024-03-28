@@ -6,7 +6,6 @@ import com.hdfw.myhdfw.repository.RoomRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -38,9 +37,12 @@ public class RoomService {
         if(id == null) return false;
         Room room = roomRepository.findById(id).orElse(null);
         if (room!=null) {
-            if(!room.getLectures().isEmpty()) return false;
-            roomRepository.deleteById(id);
-            return true;
+            if (room.getLectures().isEmpty() && room.getExams().isEmpty()) {
+                roomRepository.deleteById(id);
+                return true;
+            } else {
+                return false;
+            }
         }
         return false;
     }

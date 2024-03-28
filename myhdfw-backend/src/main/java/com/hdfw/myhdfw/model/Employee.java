@@ -30,6 +30,7 @@ public class Employee {
     String email;
     @NonNull
     @Column(name = "password")
+    @JsonIgnore
     String password;
 
     // -----------
