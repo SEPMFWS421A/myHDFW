@@ -48,4 +48,13 @@ public class StudentController {
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 
+    @DeleteMapping(path = "{student_id}")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @ApiResponse(responseCode = "204", description = "Student deleted")
+    public ResponseEntity<Void> deleteStudent(@PathVariable("student_id") Long studentId) {
+        if (studentId == null) return ResponseEntity.badRequest().build();
+        if (studentService.deleteStudent(studentId)) return ResponseEntity.noContent().build();
+        else return ResponseEntity.notFound().build();
+    }
+
 }
